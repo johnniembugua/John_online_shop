@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class UserInfoScreen extends StatefulWidget {
   @override
@@ -9,11 +11,21 @@ class UserInfoScreen extends StatefulWidget {
 }
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
-  bool _value = false;
   ScrollController _scrollController;
   var top = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
         body: Stack(
       children: [
@@ -122,17 +134,17 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   ),
                   Divider(thickness: 1, color: Colors.grey),
                   ListTileSwitch(
-                    value: _value,
+                    value: themeChange.darkTheme,
                     leading: Icon(Ionicons.md_moon),
                     onChanged: (value) {
                       setState(() {
-                        _value = value;
+                        themeChange.darkTheme = value;
                       });
                     },
                     visualDensity: VisualDensity.comfortable,
                     switchType: SwitchType.cupertino,
                     switchActiveColor: Colors.indigo,
-                    title: Text('Dark theme'),
+                    title: Text('Green theme'),
                   ),
                   userListTile('Logout', '', 4, context),
                 ],
