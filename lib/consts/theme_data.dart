@@ -8,7 +8,7 @@ class Styles {
       scaffoldBackgroundColor:
           isDarkTheme ? Colors.green : Colors.grey.shade300,
       primarySwatch: Colors.purple,
-      primaryColor: isDarkTheme ? Colors.black : Colors.grey.shade300,
+      primaryColor: isDarkTheme ? Colors.green : Colors.grey.shade300,
       accentColor: Colors.deepPurple,
       backgroundColor: isDarkTheme ? Colors.grey.shade700 : Colors.white,
       indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
