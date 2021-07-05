@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -22,21 +23,41 @@ class _FeedsProductState extends State<FeedsProduct> {
         ),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  minHeight: 100,
-                  maxHeight: MediaQuery.of(context).size.height * 0.3,
-                ),
-                child: Image(
-                  image: AssetImage(
-                    'assets/images/CatClothes.jpg',
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Container(
+                    width: double.infinity,
+                    constraints: BoxConstraints(
+                      minHeight: 100,
+                      maxHeight: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                    child: Image(
+                      image: AssetImage(
+                        'assets/images/CatClothes.jpg',
+                      ),
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
-                  fit: BoxFit.fitWidth,
                 ),
-              ),
+                Positioned(
+                  // bottom: 0,
+                  // right: 5,
+                  child: Badge(
+                    toAnimate: true,
+                    shape: BadgeShape.square,
+                    badgeColor: Colors.pink,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(8),
+                    ),
+                    badgeContent: Text(
+                      'New',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Container(
               padding: EdgeInsets.only(left: 5.0),

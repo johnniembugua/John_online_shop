@@ -23,7 +23,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   //   UserInfoScreen(),
   // ];
   List<Map<String, Object>> _pages;
-  int _selectedIndex = 4;
+  int _selectedIndex = 0;
   @override
   void initState() {
     _pages = [

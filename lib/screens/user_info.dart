@@ -117,14 +117,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   Divider(thickness: 1, color: Colors.grey),
                   userListTile(
                       'Email', 'johnniendungu321@gmail.com', 0, context),
-                  userListTile(
-                      'Email', 'johnniendungu321@gmail.com', 0, context),
-                  userListTile(
-                      'Email', 'johnniendungu321@gmail.com', 0, context),
-                  userListTile(
-                      'Email', 'johnniendungu321@gmail.com', 0, context),
-                  userListTile(
-                      'Email', 'johnniendungu321@gmail.com', 0, context),
                   userListTile('Phone number', '0799005059', 1, context),
                   userListTile('shipping address', '', 2, context),
                   userListTile('Joined date', 'date', 3, context),
@@ -182,6 +174,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         transform: Matrix4.identity()..scale(scale),
         alignment: Alignment.center,
         child: FloatingActionButton(
+          backgroundColor: Colors.purple,
           heroTag: 'btn1',
           onPressed: () {},
           child: Icon(Icons.camera_alt_outlined),
