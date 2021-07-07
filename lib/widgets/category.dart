@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CategoryWidget extends StatelessWidget {
+class CategoryWidget extends StatefulWidget {
   CategoryWidget({this.index});
   final int index;
+
+  @override
+  _CategoryWidgetState createState() => _CategoryWidgetState();
+}
+
+class _CategoryWidgetState extends State<CategoryWidget> {
   List<Map<String, Object>> categories = [
     {
       'categoryName': 'Phones',
@@ -28,10 +34,10 @@ class CategoryWidget extends StatelessWidget {
       'categoryName': 'Furniture',
       'categoryImagePath': 'assets/images/CatFurniture.jpg',
     },
-    // {
-    //   'categoryName': 'Watches',
-    //   'categoryImage': 'assets/images/CatLaptops.png',
-    // },
+    {
+      'categoryName': 'Watches',
+      'categoryImage': 'assets/images/CatLaptops.png',
+    },
   ];
 
   @override
@@ -43,7 +49,7 @@ class CategoryWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: AssetImage(
-                categories[index]['categoryImagePath'],
+                categories[widget.index]['categoryImagePath'],
               ),
               fit: BoxFit.cover,
             ),
@@ -60,7 +66,7 @@ class CategoryWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             color: Theme.of(context).backgroundColor,
             child: Text(
-              categories[index]['categoryName'],
+              categories[widget.index]['categoryName'],
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 18,

@@ -10,4 +10,6 @@ class MyAppIcons {
   static IconData bag = Feather.shopping_bag;
 
   static IconData trash = Feather.trash;
+  static IconData wishlist = Feather.heart;
+  static IconData upload = Feather.upload;
 }

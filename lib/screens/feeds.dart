@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
 
 class FeedsScreen extends StatelessWidget {
+  static const routeName = '/Feeds';
   const FeedsScreen({Key key}) : super(key: key);
 
   @override
