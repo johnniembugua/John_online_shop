@@ -1,7 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/screens/cart.dart';
+import 'package:shopping_app2/screens/wishlist.dart';
+import 'package:shopping_app2/widgets/feeds_products.dart';
 
 class ProductDetails extends StatefulWidget {
   static const routeName = '/ProductDetails';
@@ -21,19 +27,20 @@ class _ProductDetailsState extends State<ProductDetails> {
         children: [
           Container(
             foregroundDecoration: BoxDecoration(color: Colors.black12),
-            height: MediaQuery.of(context).size.hashCode * 0.45,
+            height: MediaQuery.of(context).size.height * 0.45,
             width: double.infinity,
             child: Image(
               image: AssetImage('assets/images/CatShoes.jpg'),
+              //fit: BoxFit.contain,
             ),
           ),
           SingleChildScrollView(
-            padding: EdgeInsets.only(top: 16.0, bottom: 20.0),
+            padding: EdgeInsets.only(top: 10.0, bottom: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 250,
+                  height: 200,
                 ),
                 Padding(
                   padding: EdgeInsets.all(16.0),
@@ -150,10 +157,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                           height: 1,
                         ),
                       ),
-                      _details(themeState.darkTheme, 'Brand', 'BrandName'),
-                      _details(themeState.darkTheme, 'Quantity', '12 left'),
-                      _details(themeState.darkTheme, 'Category', 'Cat Name'),
-                      _details(themeState.darkTheme, 'Popularity', 'Popular'),
+                      _details(themeState.darkTheme, 'Brand', ' BrandName'),
+                      _details(themeState.darkTheme, 'Quantity', ' 12 left'),
+                      _details(themeState.darkTheme, 'Category', ' Cat Name'),
+                      _details(themeState.darkTheme, 'Popularity', ' Popular'),
                       SizedBox(
                         height: 15,
                       ),
@@ -173,14 +180,170 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text('No reviews yet'),
+                              child: Text(
+                                'No reviews yet',
+                                style: TextStyle(
+                                  color: Theme.of(context).textSelectionColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 21,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: Text(
+                                'Be the first review!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                  color: themeState.darkTheme
+                                      ? Theme.of(context).disabledColor
+                                      : ColorsConsts.subTitle,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 70,
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: Colors.grey,
+                              height: 1,
                             )
                           ],
                         ),
                       )
                     ],
                   ),
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(8.0),
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: Text(
+                    'Suggested products:',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  width: double.infinity,
+                  height: 300,
+                  child: ListView.builder(
+                      itemCount: 7,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext ctx, int index) {
+                        return FeedsProduct();
+                      }),
                 )
+              ],
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: Text(
+                'Details',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.normal),
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    MyAppIcons.wishlist,
+                    color: ColorsConsts.favColor,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(WishlistScreen.routeName);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    MyAppIcons.cart,
+                    color: ColorsConsts.cartColor,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(CartScreen.routeName);
+                  },
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 50,
+                    child: RaisedButton(
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shape: RoundedRectangleBorder(side: BorderSide.none),
+                      color: Colors.redAccent.shade400,
+                      onPressed: () {},
+                      child: Text(
+                        'Add to Cart'.toUpperCase(),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 50,
+                    child: RaisedButton(
+                      onPressed: () {},
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      shape: RoundedRectangleBorder(side: BorderSide.none),
+                      color: Theme.of(context).backgroundColor,
+                      child: Row(
+                        children: [
+                          Text(
+                            'Buy Now'.toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Theme.of(context).textSelectionColor),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.payment,
+                            color: Colors.green.shade700,
+                            size: 19,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: themeState.darkTheme
+                          ? Theme.of(context).disabledColor
+                          : ColorsConsts.subTitle,
+                      height: 50,
+                      child: InkWell(
+                        splashColor: ColorsConsts.favColor,
+                        onTap: () {},
+                        child: Center(
+                          child: Icon(
+                            MyAppIcons.wishlist,
+                            color: ColorsConsts.white,
+                          ),
+                        ),
+                      ),
+                    ))
               ],
             ),
           )
@@ -202,7 +365,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           Text(
             title,
             style: TextStyle(
-              color: Theme.of(context).textSelectionColor,
+              color: TextSelectionTheme.of(context).selectionColor,
               fontWeight: FontWeight.w400,
               fontSize: 21.0,
             ),

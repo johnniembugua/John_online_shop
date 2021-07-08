@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/widgets/cart_empty.dart';
@@ -12,7 +11,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List products = [];
-    return !products.isEmpty
+    return products.isNotEmpty //Todo: use is empty instead
         ? Scaffold(
             body: CartEmpty(),
           )

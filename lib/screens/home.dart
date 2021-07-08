@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
                     ),
                     Spacer(),
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.of(context).pushNamed(
                           BrandNavigationRailScreen.routeName,
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
                     ),
                     Spacer(),
-                    FlatButton(
+                    TextButton(
                       onPressed: () {},
                       child: Text(
                         'View all...',
