@@ -4,8 +4,8 @@ import 'package:shopping_app2/models/product.dart';
 import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
 
-class FeedsScreen extends StatelessWidget {
-  static const routeName = '/Feeds';
+class CategoriesFeedsScreen extends StatelessWidget {
+  static const routeName = '/CategoriesFeedsScreen';
 
   @override
   Widget build(BuildContext context) {
