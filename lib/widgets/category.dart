@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app2/inner_screens/categories_feeds.dart';
+import 'package:shopping_app2/screens/feeds.dart';
 
 class CategoryWidget extends StatefulWidget {
   CategoryWidget({this.index});
@@ -44,19 +46,24 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image: AssetImage(
-                categories[widget.index]['categoryImagePath'],
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(CategoriesFeedsScreen.routeName, arguments: '${categories[widget.index]['categoryName']}');
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: AssetImage(
+                  categories[widget.index]['categoryImagePath'],
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
             ),
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            width: 150,
+            height: 150,
           ),
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          width: 150,
-          height: 150,
         ),
         Positioned(
           left: 10,

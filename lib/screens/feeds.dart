@@ -1,40 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shopping_app2/models/product.dart';
-import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
 
 class FeedsScreen extends StatelessWidget {
   static const routeName = '/Feeds';
-
   @override
   Widget build(BuildContext context) {
-    final productsProvider = Provider.of<Products>(context);
-    List<Product> productList = productsProvider.products;
     return Scaffold(
-      body: GridView.count(
-        childAspectRatio: 230 / 400,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        crossAxisCount: 2,
-        children: List.generate(
-          productList.length,
-          (index) {
-            return ChangeNotifierProvider.value(
-                value: productList[index], child: FeedsProduct());
-          },
-        ),
-      ),
-
-      // body: StaggeredGridView.countBuilder(
-      //   padding: EdgeInsets.all(8.0),
-      //   crossAxisCount: 6,
-      //   itemBuilder: (BuildContext context, int index) => FeedsProduct(),
-      //   staggeredTileBuilder: (int index) =>
-      //       StaggeredTile.count(3, index.isEven ? 4 : 5),
-      //   mainAxisSpacing: 6.0,
-      //   crossAxisSpacing: 8.0,
-      // ),
-    );
+        body: GridView.count(
+      crossAxisCount: 2,
+      childAspectRatio: 240 / 290,
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+      children: List.generate(100, (index) {
+        return FeedsProduct();
+      }),
+    )
+//         StaggeredGridView.countBuilder(
+//           padding: ,
+//   crossAxisCount: 6,
+//   itemCount: 8,
+//   itemBuilder: (BuildContext context, int index) =>FeedProducts(),
+//   staggeredTileBuilder: (int index) =>
+//       new StaggeredTile.count(3, index.isEven ? 4 : 5),
+//   mainAxisSpacing: 8.0,
+//   crossAxisSpacing: 6.0,
+// ),
+        );
   }
 }
