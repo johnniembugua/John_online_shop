@@ -2,187 +2,225 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/inner_screens/product_detail.dart';
+import 'package:shopping_app2/models/cart_attr.dart';
+import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/services/global_method.dart';
 
 class CartFull extends StatefulWidget {
-  const CartFull({Key key}) : super(key: key);
+  final String productId;
+  const CartFull({Key key, this.productId}) : super(key: key);
 
   @override
   _CartFullState createState() => _CartFullState();
 }
 
 class _CartFullState extends State<CartFull> {
+  GlobalMethod globalMethod = GlobalMethod();
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     final themeChange = Provider.of<DarkThemeProvider>(context);
-    return Container(
-      height: 130.0,
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomRight: const Radius.circular(16.0),
-          bottomLeft: const Radius.circular(16.0),
+    final cartAttr = Provider.of<CartAttr>(context);
+    double subTotal = cartAttr.price * cartAttr.quantity;
+    return InkWell(
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(ProductDetails.routeName, arguments: widget.productId);
+      },
+      child: Container(
+        height: 135.0,
+        margin: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomRight: const Radius.circular(16.0),
+            bottomLeft: const Radius.circular(16.0),
+          ),
+          color: Theme.of(context).backgroundColor,
         ),
-        color: Colors.blue,
-      ),
-      child: Row(
-        children: [
-          Container(
-            //margin: EdgeInsets.all(8),
-            width: 130,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/Dell.jpg'),
-                fit: BoxFit.fill,
+        child: Row(
+          children: [
+            Container(
+              //margin: EdgeInsets.all(8),
+              width: 130,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(cartAttr.imageUrl),
+                  //fit: BoxFit.fill,
+                ),
               ),
             ),
-          ),
-          Flexible(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            'Title',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 15),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(32.0),
-                            onTap: () {},
-                            //splashColor: ,
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              child: Icon(
-                                Entypo.cross,
-                                color: Colors.red,
-                                size: 22,
-                              ),
+            Flexible(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              cartAttr.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 15),
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text('Price'),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'Ksh 450',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text('Sub Total'),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'Ksh 450',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: themeChange.darkTheme
-                                ? Colors.brown.shade900
-                                : Theme.of(context).accentColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Ships Free',
-                          style: TextStyle(
-                            color: themeChange.darkTheme
-                                ? Colors.brown.shade900
-                                : Theme.of(context).accentColor,
-                          ),
-                        ),
-                        Spacer(),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(32.0),
-                            onTap: () {},
-                            //splashColor: ,
-                            child: Container(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(32.0),
+                              onTap: () {
+                                globalMethod.showDialogg(
+                                    'Remove item!',
+                                    'Product will be removed from the cart',
+                                    () => cartProvider
+                                        .removeItem(widget.productId),
+                                    context);
+                              },
+                              //splashColor: ,
+                              child: Container(
+                                height: 50,
+                                width: 50,
                                 child: Icon(
-                                  Entypo.minus,
+                                  Entypo.cross,
                                   color: Colors.red,
                                   size: 22,
                                 ),
                               ),
                             ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text('Price'),
+                          SizedBox(
+                            width: 5,
                           ),
-                        ),
-                        Card(
-                          elevation: 12,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.12,
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  ColorsConsts.gradiendLStart,
-                                  ColorsConsts.gradiendLEnd,
-                                ],
-                                stops: [
-                                  0.0,
-                                  0.7,
-                                ],
+                          Text(
+                            'Ksh ${cartAttr.price}',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text('Sub Total'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          FittedBox(
+                            child: Text(
+                              'Ksh ${subTotal.toStringAsFixed(2)}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: themeChange.darkTheme
+                                    ? Colors.brown.shade900
+                                    : Theme.of(context).accentColor,
                               ),
                             ),
-                            child: Text(
-                              '20',
-                              textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Ships Free',
+                            style: TextStyle(
+                              color: themeChange.darkTheme
+                                  ? Colors.brown.shade900
+                                  : Theme.of(context).accentColor,
                             ),
                           ),
-                        ),
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(32.0),
-                            onTap: () {},
-                            //splashColor: ,
-                            child: Container(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Entypo.plus,
-                                  color: Colors.green,
-                                  size: 22,
+                          Spacer(),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(32.0),
+                              onTap: cartAttr.quantity < 2
+                                  ? null
+                                  : () {
+                                      cartProvider.reduceItemByOne(
+                                        widget.productId,
+                                      );
+                                    },
+                              //splashColor: ,
+                              child: Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Entypo.minus,
+                                    color: cartAttr.quantity < 2
+                                        ? Colors.grey
+                                        : Colors.red,
+                                    size: 22,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
+                          Card(
+                            elevation: 12,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.12,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    ColorsConsts.gradiendLStart,
+                                    ColorsConsts.gradiendLEnd,
+                                  ],
+                                  stops: [
+                                    0.0,
+                                    0.7,
+                                  ],
+                                ),
+                              ),
+                              child: Text(
+                                cartAttr.quantity.toString(),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(32.0),
+                              onTap: () {
+                                cartProvider.addProductToCart(
+                                    widget.productId,
+                                    cartAttr.price,
+                                    cartAttr.title,
+                                    cartAttr.imageUrl);
+                              },
+                              //splashColor: ,
+                              child: Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Entypo.plus,
+                                    color: Colors.green,
+                                    size: 22,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

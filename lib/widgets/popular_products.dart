@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/inner_screens/product_detail.dart';
 import 'package:shopping_app2/models/product.dart';
+import 'package:shopping_app2/provider/cart_provider.dart';
 
 class PopularProducts extends StatelessWidget {
   /* final String imageUrl;
@@ -16,6 +17,7 @@ class PopularProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     final productAttributes = Provider.of<Product>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -112,12 +114,24 @@ class PopularProducts extends StatelessWidget {
                             child: Material(
                               color: Colors.transparent,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: cartProvider.getCartItems
+                                        .containsKey(productAttributes.id)
+                                    ? () {}
+                                    : () {
+                                        cartProvider.addProductToCart(
+                                            productAttributes.id,
+                                            productAttributes.price,
+                                            productAttributes.title,
+                                            productAttributes.imageUrl);
+                                      },
                                 borderRadius: BorderRadius.circular(30),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Icon(
-                                    MaterialCommunityIcons.cart_plus,
+                                    cartProvider.getCartItems
+                                            .containsKey(productAttributes.id)
+                                        ? MaterialCommunityIcons.check_all
+                                        : MaterialCommunityIcons.cart_plus,
                                     size: 25,
                                     color: Colors.black,
                                   ),

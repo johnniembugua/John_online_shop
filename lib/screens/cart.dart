@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
+import 'package:shopping_app2/provider/cart_provider.dart';
+import 'package:shopping_app2/services/global_method.dart';
 import 'package:shopping_app2/widgets/cart_empty.dart';
 import 'package:shopping_app2/widgets/cart_full.dart';
 
@@ -10,32 +13,48 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List products = [];
-    return products.isNotEmpty //Todo: use is empty instead
+    GlobalMethod globalMethod = GlobalMethod();
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    return cartProvider.getCartItems.isEmpty
         ? Scaffold(
             body: CartEmpty(),
           )
         : Scaffold(
-            bottomSheet: checkoutSection(context),
+            bottomSheet: checkoutSection(context, cartProvider.totalAmount),
             appBar: AppBar(
-              title: Text('Cart Items Count'),
+              backgroundColor: Theme.of(context).backgroundColor,
+              title: Text('Cart (${cartProvider.getCartItems.length})'),
               actions: [
-                IconButton(icon: Icon(MyAppIcons.trash), onPressed: () {})
+                IconButton(
+                    icon: Icon(MyAppIcons.trash),
+                    onPressed: () {
+                      globalMethod.showDialogg(
+                          'Clear cart!',
+                          'Your Cart Will be cleared',
+                          () => cartProvider.clearCart(),
+                          context);
+                    })
               ],
             ),
             body: Container(
               margin: EdgeInsets.only(bottom: 60),
               child: ListView.builder(
                 itemBuilder: (BuildContext ctx, int index) {
-                  return CartFull();
+                  return ChangeNotifierProvider.value(
+                      value: cartProvider.getCartItems.values.toList()[index],
+                      child: CartFull(
+                        productId:
+                            cartProvider.getCartItems.keys.toList()[index],
+                      ));
                 },
-                itemCount: 5,
+                itemCount: cartProvider.getCartItems.length,
               ),
             ),
           );
   }
 
-  Widget checkoutSection(BuildContext ctx) {
+  Widget checkoutSection(BuildContext ctx, double subTotal) {
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -94,7 +113,7 @@ class CartScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Ksh 450',
+              'Ksh ${subTotal.toStringAsFixed(3)}',
               style: TextStyle(
                 color: Colors.blue,
                 fontSize: 18,

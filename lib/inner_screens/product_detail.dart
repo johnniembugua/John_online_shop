@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
+import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/screens/cart.dart';
@@ -23,10 +24,11 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
-    final productData = Provider.of<Products>(context);
+    final productData = Provider.of<Products>(context, listen: false);
     final productList = productData.products;
     final productId = ModalRoute.of(context).settings.arguments as String;
     final productAttr = productData.findById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
       body: Stack(
@@ -301,9 +303,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       shape: RoundedRectangleBorder(side: BorderSide.none),
                       color: Colors.redAccent.shade400,
-                      onPressed: () {},
+                      onPressed:
+                          cartProvider.getCartItems.containsKey(productId)
+                              ? () {}
+                              : () {
+                                  cartProvider.addProductToCart(
+                                      productId,
+                                      productAttr.price,
+                                      productAttr.title,
+                                      productAttr.imageUrl);
+                                },
                       child: Text(
-                        'Add to Cart'.toUpperCase(),
+                        cartProvider.getCartItems.containsKey(productId)
+                            ? 'In cart'.toUpperCase()
+                            : 'Add to Cart'.toUpperCase(),
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
