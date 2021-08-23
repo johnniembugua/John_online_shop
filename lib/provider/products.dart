@@ -587,11 +587,23 @@ class Products with ChangeNotifier {
     return [..._products];
   }
 
+  List<Product> get popularProducts {
+    return _products.where((element) => element.isPopular).toList();
+  }
+
   List<Product> findByCategory(String categoryName) {
     List _categoryList = _products
         .where((element) => element.productCategoryName
             .toLowerCase()
             .contains(categoryName.toLowerCase()))
+        .toList();
+    return _categoryList;
+  }
+
+  List<Product> findByBrand(String brandName) {
+    List _categoryList = _products
+        .where((element) =>
+            element.brand.toLowerCase().contains(brandName.toLowerCase()))
         .toList();
     return _categoryList;
   }

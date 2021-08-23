@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app2/provider/products.dart';
 
 import 'brands_rail_widget.dart';
 
@@ -204,6 +206,8 @@ class ContentSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productData = Provider.of<Products>(context);
+    final productsBrands = productData.findByBrand(brand);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 8, 0, 0),
@@ -211,9 +215,11 @@ class ContentSpace extends StatelessWidget {
           removeTop: true,
           context: context,
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: productsBrands.length,
             itemBuilder: (BuildContext context, int index) =>
-                BrandsNavigationRail(),
+                ChangeNotifierProvider.value(
+                    value: productsBrands[index],
+                    child: BrandsNavigationRail()),
           ),
         ),
       ),

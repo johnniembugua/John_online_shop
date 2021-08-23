@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app2/models/product.dart';
 
 class PopularProducts extends StatelessWidget {
-  const PopularProducts({Key key}) : super(key: key);
+  final String imageUrl;
+  final String title;
+  final String description;
+  final double price;
+
+  const PopularProducts(
+      {Key key, this.imageUrl, this.title, this.description, this.price})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class PopularProducts extends StatelessWidget {
                       height: 170,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/CatFurniture.jpg'),
+                          image: AssetImage(imageUrl),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -56,7 +65,7 @@ class PopularProducts extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           color: Theme.of(context).backgroundColor,
                           child: Text(
-                            '\Ksh 200.00',
+                            '\Ksh $price',
                             style: TextStyle(
                               color: Theme.of(context).textSelectionColor,
                             ),
@@ -70,7 +79,7 @@ class PopularProducts extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Title',
+                        title,
                         maxLines: 1,
                         style: TextStyle(
                           fontSize: 18,
@@ -80,14 +89,16 @@ class PopularProducts extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Description',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade800,
+                          Flexible(
+                            child: Text(
+                              description,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey.shade800,
+                              ),
                             ),
                           ),
                           Material(
