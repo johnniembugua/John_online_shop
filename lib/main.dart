@@ -63,6 +63,7 @@ class _MyAppState extends State<MyApp> {
               CartScreen.routeName: (ctx) => CartScreen(),
               CategoriesFeedsScreen.routeName: (context) =>
                   CategoriesFeedsScreen(),
+              FeedsScreen.routeName: (context) => FeedsScreen(),
               WishlistScreen.routeName: (ctx) => WishlistScreen(),
               ProductDetails.routeName: (ctx) => ProductDetails(),
             },

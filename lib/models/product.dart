@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Product with ChangeNotifier {
-  final String productId;
+  final String id;
   final String title;
   final String description;
   final double price;
@@ -13,7 +13,7 @@ class Product with ChangeNotifier {
   final bool isPopular;
 
   Product({
-    this.productId,
+    this.id,
     this.title,
     this.description,
     this.price,

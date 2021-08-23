@@ -3,6 +3,7 @@ import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/feeds.dart';
+import 'package:shopping_app2/screens/wishlist.dart';
 
 class BackLayerMenu extends StatefulWidget {
   BackLayerMenu({Key key}) : super(key: key);
@@ -134,7 +135,7 @@ class _BackLayerMenuState extends State<BackLayerMenu> {
                   height: 10,
                 ),
                 content(context, () {
-                  navigaTo(context, FeedsScreen.routeName);
+                  navigaTo(context, WishlistScreen.routeName);
                 }, 'Wishlist', 2),
                 SizedBox(
                   height: 10,

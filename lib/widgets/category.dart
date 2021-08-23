@@ -36,10 +36,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       'categoryName': 'Furniture',
       'categoryImagePath': 'assets/images/CatFurniture.jpg',
     },
-    {
-      'categoryName': 'Watches',
-      'categoryImage': 'assets/images/CatLaptops.png',
-    },
+    // {
+    //   'categoryName': 'Watches',
+    //   'categoryImage': 'assets/images/CatLaptops.png',
+    // },
   ];
 
   @override
@@ -48,7 +48,8 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       children: [
         InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(CategoriesFeedsScreen.routeName, arguments: '${categories[widget.index]['categoryName']}');
+            Navigator.of(context).pushNamed(CategoriesFeedsScreen.routeName,
+                arguments: '${categories[widget.index]['categoryName']}');
           },
           child: Container(
             decoration: BoxDecoration(
