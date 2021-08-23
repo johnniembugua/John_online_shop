@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app2/inner_screens/product_detail.dart';
 import 'package:shopping_app2/models/product.dart';
 
 class PopularProducts extends StatelessWidget {
-  final String imageUrl;
+  /* final String imageUrl;
   final String title;
   final String description;
   final double price;
 
   const PopularProducts(
       {Key key, this.imageUrl, this.title, this.description, this.price})
-      : super(key: key);
+      : super(key: key); */
 
   @override
   Widget build(BuildContext context) {
+    final productAttributes = Provider.of<Product>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -33,7 +35,10 @@ class PopularProducts extends StatelessWidget {
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(ProductDetails.routeName,
+                  arguments: productAttributes.id);
+            },
             child: Column(
               children: [
                 Stack(
@@ -42,21 +47,21 @@ class PopularProducts extends StatelessWidget {
                       height: 170,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(imageUrl),
-                          fit: BoxFit.fill,
+                          image: NetworkImage(productAttributes.imageUrl),
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
                     Positioned(
-                        right: 12,
-                        top: 10,
+                        right: 10,
+                        top: 8,
                         child: Icon(
                           Entypo.star,
                           color: Colors.grey.shade800,
                         )),
                     Positioned(
                         right: 10,
-                        top: 7,
+                        top: 8,
                         child: Icon(Entypo.star_outlined, color: Colors.white)),
                     Positioned(
                         right: 12,
@@ -65,7 +70,7 @@ class PopularProducts extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           color: Theme.of(context).backgroundColor,
                           child: Text(
-                            '\Ksh $price',
+                            '\Ksh ${productAttributes.price}',
                             style: TextStyle(
                               color: Theme.of(context).textSelectionColor,
                             ),
@@ -79,7 +84,7 @@ class PopularProducts extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        productAttributes.title,
                         maxLines: 1,
                         style: TextStyle(
                           fontSize: 18,
@@ -89,9 +94,10 @@ class PopularProducts extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Flexible(
+                          Expanded(
+                            flex: 5,
                             child: Text(
-                              description,
+                              productAttributes.description,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -101,17 +107,20 @@ class PopularProducts extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(30),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  MaterialCommunityIcons.cart_plus,
-                                  size: 25,
-                                  color: Colors.black,
+                          Expanded(
+                            flex: 1,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {},
+                                borderRadius: BorderRadius.circular(30),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    MaterialCommunityIcons.cart_plus,
+                                    size: 25,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),

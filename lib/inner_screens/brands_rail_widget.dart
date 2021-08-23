@@ -9,7 +9,8 @@ class BrandsNavigationRail extends StatelessWidget {
     final productAttributes = Provider.of<Product>(context);
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(ProductDetails.routeName);
+        Navigator.of(context).pushNamed(ProductDetails.routeName,
+            arguments: productAttributes.id);
       },
       child: Container(
         //  color: Colors.red,
@@ -24,10 +25,7 @@ class BrandsNavigationRail extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Theme.of(context).backgroundColor,
                   image: DecorationImage(
-                    image: AssetImage(
-                      productAttributes.imageUrl,
-                    ),
-                  ),
+                      image: NetworkImage(productAttributes.imageUrl)),
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   boxShadow: [
                     BoxShadow(

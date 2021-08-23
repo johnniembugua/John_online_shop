@@ -208,6 +208,11 @@ class ContentSpace extends StatelessWidget {
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
     final productsBrands = productData.findByBrand(brand);
+    if (brand == 'All') {
+      for (int i = 0; i < productData.products.length; i++) {
+        productsBrands.add(productData.products[i]);
+      }
+    }
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 8, 0, 0),

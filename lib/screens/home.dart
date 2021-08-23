@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/inner_screens/brands_navigation_rail.dart';
 import 'package:shopping_app2/provider/products.dart';
+import 'package:shopping_app2/screens/feeds.dart';
 import 'package:shopping_app2/widgets/backlayer.dart';
 import 'package:shopping_app2/widgets/category.dart';
 import 'package:shopping_app2/widgets/popular_products.dart';
@@ -188,7 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Spacer(),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(FeedsScreen.routeName,
+                            arguments: 'popular');
+                      },
                       child: Text(
                         'View all...',
                         style: TextStyle(
@@ -208,11 +212,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: popularItems.length,
                     itemBuilder: (BuildContext ctx, int index) {
-                      return PopularProducts(
-                        imageUrl: popularItems[index].imageUrl,
-                        title: popularItems[index].title,
-                        description: popularItems[index].description,
-                        price: popularItems[index].price,
+                      return ChangeNotifierProvider.value(
+                        value: popularItems[index],
+                        child: PopularProducts(
+                            /* imageUrl: popularItems[index].imageUrl,
+                          title: popularItems[index].title,
+                          description: popularItems[index].description,
+                          price: popularItems[index].price, */
+                            ),
                       );
                     }),
               )
