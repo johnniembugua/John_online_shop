@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app2/inner_screens/product_detail.dart';
 import 'package:shopping_app2/models/product.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
+import 'package:shopping_app2/provider/fav_provider.dart';
 
 class PopularProducts extends StatelessWidget {
   /* final String imageUrl;
@@ -19,6 +20,7 @@ class PopularProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     final productAttributes = Provider.of<Product>(context);
+    final favsProvider = Provider.of<FavsProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -59,7 +61,10 @@ class PopularProducts extends StatelessWidget {
                         top: 8,
                         child: Icon(
                           Entypo.star,
-                          color: Colors.grey.shade800,
+                          color: favsProvider.getFavsItems
+                                  .containsKey(productAttributes.id)
+                              ? Colors.red
+                              : Colors.grey.shade800,
                         )),
                     Positioned(
                         right: 10,

@@ -12,7 +12,7 @@ class GlobalMethod {
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Image.network(
-                    'https://image.flaticons.com/icons/png/128/564/564619.png',
+                    'https://image.flaticon.com/icons/png/128/564/564619.png',
                     height: 20.0,
                     width: 20,
                   ),
@@ -27,11 +27,15 @@ class GlobalMethod {
             actions: [
               TextButton(
                   onPressed: () {
-                    fct();
                     Navigator.pop(context);
                   },
                   child: Text('Cancel')),
-              TextButton(onPressed: fct, child: Text('Ok')),
+              TextButton(
+                  onPressed: () {
+                    fct();
+                    Navigator.pop(context);
+                  },
+                  child: Text('Ok')),
             ],
           );
         });

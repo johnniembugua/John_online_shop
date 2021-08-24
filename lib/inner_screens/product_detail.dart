@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
@@ -272,23 +273,48 @@ class _ProductDetailsState extends State<ProductDetails> {
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.normal),
               ),
               actions: [
-                IconButton(
-                  icon: Icon(
-                    MyAppIcons.wishlist,
-                    color: ColorsConsts.favColor,
+                Consumer<FavsProvider>(
+                  builder: (_, favs, ch) => Badge(
+                    badgeColor: ColorsConsts.cartBadgeColor,
+                    animationType: BadgeAnimationType.slide,
+                    toAnimate: true,
+                    position: BadgePosition(top: 5, end: 7),
+                    badgeContent: Text(
+                      favs.getFavsItems.length.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        MyAppIcons.wishlist,
+                        color: ColorsConsts.favColor,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(WishlistScreen.routeName);
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(WishlistScreen.routeName);
-                  },
                 ),
-                IconButton(
-                  icon: Icon(
-                    MyAppIcons.cart,
-                    color: ColorsConsts.cartColor,
+                Consumer<CartProvider>(
+                  builder: (_, cart, ch) => Badge(
+                    badgeColor: ColorsConsts.cartBadgeColor,
+                    animationType: BadgeAnimationType.slide,
+                    toAnimate: true,
+                    position: BadgePosition(top: 5, end: 7),
+                    badgeContent: Text(
+                      cart.getCartItems.length.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        MyAppIcons.cart,
+                        color: ColorsConsts.cartColor,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(CartScreen.routeName);
-                  },
                 ),
               ],
             ),
