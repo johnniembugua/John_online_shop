@@ -6,6 +6,7 @@ import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/wishlist.dart';
@@ -29,6 +30,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final productAttr = productData.findById(productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final favsProvider = Provider.of<FavsProvider>(context);
 
     return Scaffold(
       body: Stack(
@@ -361,11 +363,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                       height: 50,
                       child: InkWell(
                         splashColor: ColorsConsts.favColor,
-                        onTap: () {},
+                        onTap: () {
+                          favsProvider.addAndRemoveFromFav(
+                              productId,
+                              productAttr.price,
+                              productAttr.title,
+                              productAttr.imageUrl);
+                        },
                         child: Center(
                           child: Icon(
-                            MyAppIcons.wishlist,
-                            color: ColorsConsts.white,
+                            favsProvider.getFavsItems.containsKey(productId)
+                                ? Icons.favorite
+                                : MyAppIcons.wishlist,
+                            color:
+                                favsProvider.getFavsItems.containsKey(productId)
+                                    ? Colors.red
+                                    : ColorsConsts.white,
                           ),
                         ),
                       ),

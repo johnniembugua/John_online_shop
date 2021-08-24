@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/screens/feeds.dart';
 
 class WishListEmpty extends StatelessWidget {
   const WishListEmpty({Key key}) : super(key: key);
@@ -53,7 +54,8 @@ class WishListEmpty extends StatelessWidget {
           width: MediaQuery.of(context).size.width * .9,
           height: MediaQuery.of(context).size.height * 0.06,
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.of(context).pushNamed(FeedsScreen.routeName),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
               side: BorderSide(color: Colors.red),

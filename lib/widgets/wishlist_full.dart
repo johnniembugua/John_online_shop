@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/models/fav_attr.dart';
+import 'package:shopping_app2/provider/fav_provider.dart';
+import 'package:shopping_app2/services/global_method.dart';
 
 class WishlistFull extends StatefulWidget {
-  const WishlistFull({Key key}) : super(key: key);
+  final String productId;
+  const WishlistFull({Key key, this.productId}) : super(key: key);
 
   @override
   _WishlistFullState createState() => _WishlistFullState();
@@ -11,6 +16,8 @@ class WishlistFull extends StatefulWidget {
 class _WishlistFullState extends State<WishlistFull> {
   @override
   Widget build(BuildContext context) {
+    final favsAttr = Provider.of<FavAttr>(context);
+
     return Stack(
       children: [
         Container(
@@ -32,7 +39,7 @@ class _WishlistFullState extends State<WishlistFull> {
                     Container(
                       height: 80,
                       child: Image(
-                        image: AssetImage('assets/images/CatShoes.jpg'),
+                        image: NetworkImage(favsAttr.imageUrl),
                       ),
                     ),
                     SizedBox(
@@ -43,7 +50,7 @@ class _WishlistFullState extends State<WishlistFull> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'title',
+                          favsAttr.title,
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.bold),
                         ),
@@ -51,7 +58,7 @@ class _WishlistFullState extends State<WishlistFull> {
                           height: 20.0,
                         ),
                         Text(
-                          '\Ksh 1600',
+                          '\Ksh ${favsAttr.price}',
                           style: TextStyle(
                               fontSize: 18.0, fontWeight: FontWeight.bold),
                         ),
@@ -63,12 +70,14 @@ class _WishlistFullState extends State<WishlistFull> {
             ),
           ),
         ),
-        positionedRemove(),
+        positionedRemove(widget.productId),
       ],
     );
   }
 
-  Widget positionedRemove() {
+  Widget positionedRemove(String productId) {
+    final favsProvider = Provider.of<FavsProvider>(context);
+    GlobalMethod globalMethod = GlobalMethod();
     return Positioned(
       top: 20,
       right: 15,
@@ -76,7 +85,13 @@ class _WishlistFullState extends State<WishlistFull> {
         height: 30,
         width: 30,
         child: MaterialButton(
-          onPressed: () {},
+          onPressed: () {
+            globalMethod.showDialogg(
+                'Remove favourites!',
+                'Areyou sure you want to remove your favourite item?',
+                () => favsProvider.removeItem(productId),
+                context);
+          },
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           padding: EdgeInsets.all(0.0),

@@ -4,6 +4,7 @@ import 'package:shopping_app2/inner_screens/product_detail.dart';
 
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +53,7 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(
             create: (_) => CartProvider(),
           ),
+          ChangeNotifierProvider(create: (_)=>FavsProvider(),),
         ],
         child:
             Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
