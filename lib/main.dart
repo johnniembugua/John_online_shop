@@ -6,9 +6,10 @@ import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
 import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
-import 'package:shopping_app2/screens/bottom_bar.dart';
+//import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/screens/cart.dart';
+import 'package:shopping_app2/screens/landing_page.dart';
 
 import 'inner_screens/brands_navigation_rail.dart';
 import 'inner_screens/categories_feeds.dart';
@@ -53,7 +54,9 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(
             create: (_) => CartProvider(),
           ),
-          ChangeNotifierProvider(create: (_)=>FavsProvider(),),
+          ChangeNotifierProvider(
+            create: (_) => FavsProvider(),
+          ),
         ],
         child:
             Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
@@ -61,7 +64,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            home: BottomBarScreen(),
+            home: LandingPage(),
             //initialRoute: '/',
             routes: {
               //   '/': (ctx) => LandingPage(),

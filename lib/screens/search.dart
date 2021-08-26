@@ -139,7 +139,7 @@ class _SearchState extends State<Search> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     crossAxisCount: 2,
-                    childAspectRatio: 240 / 420,
+                    childAspectRatio: 240 / 320,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                     children: List.generate(

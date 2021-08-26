@@ -56,7 +56,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
             ),
           ),
           Positioned(
-            top: 30,
+            top: 10,
             right: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
