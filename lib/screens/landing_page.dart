@@ -202,6 +202,8 @@ class _LandingPageState extends State<LandingPage>
             children: [
               OutlineButton(
                 //onPressed: _googleSignIn,
+                onPressed: () {},
+
                 shape: StadiumBorder(),
                 highlightedBorderColor: Colors.red.shade200,
                 borderSide: BorderSide(width: 2, color: Colors.red),
@@ -209,7 +211,6 @@ class _LandingPageState extends State<LandingPage>
               ),
               OutlineButton(
                 onPressed: () {
-                  ;
                   // Navigator.pushNamed(context, BottomBarScreen.routeName);
                 },
                 shape: StadiumBorder(),

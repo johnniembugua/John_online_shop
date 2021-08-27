@@ -8,6 +8,7 @@ import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 //import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app2/screens/auth/login.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/landing_page.dart';
 
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
               FeedsScreen.routeName: (context) => FeedsScreen(),
               WishlistScreen.routeName: (ctx) => WishlistScreen(),
               ProductDetails.routeName: (ctx) => ProductDetails(),
+              LoginScreen.routeName: (ctx) => LoginScreen(),
             },
           );
         }));
