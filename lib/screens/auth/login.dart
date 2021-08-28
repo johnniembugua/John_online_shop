@@ -1,11 +1,10 @@
-import 'package:ECommerceApp/consts/colors.dart';
-import 'package:ECommerceApp/screens/auth/forget_password.dart';
-import 'package:ECommerceApp/services/global_method.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:shopping_app2/consts/colors.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
+
+import 'forget_password.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/LoginScreen';
@@ -19,8 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String _emailAddress = '';
   String _password = '';
   final _formKey = GlobalKey<FormState>();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  GlobalMethods _globalMethods = GlobalMethods();
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  // GlobalMethods _globalMethods = GlobalMethods();
   bool _isLoading = false;
   @override
   void dispose() {
@@ -28,31 +27,31 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _submitForm() async {
-    final isValid = _formKey.currentState.validate();
-    FocusScope.of(context).unfocus();
-    if (isValid) {
-      setState(() {
-        _isLoading = true;
-      });
-      _formKey.currentState.save();
-      try {
-        await _auth
-            .signInWithEmailAndPassword(
-                email: _emailAddress.toLowerCase().trim(),
-                password: _password.trim())
-            .then((value) =>
-                Navigator.canPop(context) ? Navigator.pop(context) : null);
-      } catch (error) {
-        _globalMethods.authErrorHandle(error.message, context);
-        print('error occured ${error.message}');
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
-      }
-    }
-  }
+  // void _submitForm() async {
+  //   final isValid = _formKey.currentState.validate();
+  //   FocusScope.of(context).unfocus();
+  //   if (isValid) {
+  //     setState(() {
+  //       _isLoading = true;
+  //     });
+  //     _formKey.currentState.save();
+  //     try {
+  //       await _auth
+  //           .signInWithEmailAndPassword(
+  //               email: _emailAddress.toLowerCase().trim(),
+  //               password: _password.trim())
+  //           .then((value) =>
+  //               Navigator.canPop(context) ? Navigator.pop(context) : null);
+  //     } catch (error) {
+  //       _globalMethods.authErrorHandle(error.message, context);
+  //       print('error occured ${error.message}');
+  //     } finally {
+  //       setState(() {
+  //         _isLoading = false;
+  //       });
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _password = value;
                             },
                             obscureText: _obscureText,
-                            onEditingComplete: _submitForm,
+                            onEditingComplete: () {} /* _submitForm */,
                           ),
                         ),
                         Align(
@@ -205,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ColorsConsts.backgroundColor),
                                       ),
                                     )),
-                                    onPressed: _submitForm,
+                                    onPressed: () {} /*_ submitForm */,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
