@@ -77,6 +77,7 @@ class _MyAppState extends State<MyApp> {
               FeedsScreen.routeName: (context) => FeedsScreen(),
               WishlistScreen.routeName: (ctx) => WishlistScreen(),
               ProductDetails.routeName: (ctx) => ProductDetails(),
+              LandingPage.routeName: (ctx) => LandingPage(),
               LoginScreen.routeName: (ctx) => LoginScreen(),
             },
           );
