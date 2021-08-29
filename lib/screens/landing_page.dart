@@ -5,6 +5,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/screens/auth/login.dart';
 
+import 'auth/sign_up.dart';
+import 'bottom_bar.dart';
+
 class LandingPage extends StatefulWidget {
   static const routeName = '/LandingPage';
   @override
@@ -58,7 +61,7 @@ class _LandingPageState extends State<LandingPage>
         //   'https://image.flaticon.com/icons/png/128/564/564619.png',
         //   fit: BoxFit.contain,
         // ),
-        //errorWidget: (context, url, error) => Icon(Icons.error),
+        errorWidget: (context, url, error) => Icon(Icons.error),
         fit: BoxFit.cover,
         height: double.infinity,
         width: double.infinity,
@@ -146,7 +149,7 @@ class _LandingPageState extends State<LandingPage>
                           ),
                         )),
                     onPressed: () {
-                      // Navigator.pushNamed(context, SignUpScreen.routeName);
+                      Navigator.pushNamed(context, SignUpScreen.routeName);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -215,7 +218,7 @@ class _LandingPageState extends State<LandingPage>
               ),
               OutlineButton(
                 onPressed: () {
-                  // Navigator.pushNamed(context, BottomBarScreen.routeName);
+                  Navigator.pushNamed(context, BottomBarScreen.routeName);
                 },
                 shape: StadiumBorder(),
                 highlightedBorderColor: Colors.deepPurple.shade200,

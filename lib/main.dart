@@ -9,6 +9,8 @@ import 'package:shopping_app2/provider/products.dart';
 //import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/screens/auth/login.dart';
+import 'package:shopping_app2/screens/auth/sign_up.dart';
+import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/landing_page.dart';
 
@@ -79,6 +81,8 @@ class _MyAppState extends State<MyApp> {
               ProductDetails.routeName: (ctx) => ProductDetails(),
               LandingPage.routeName: (ctx) => LandingPage(),
               LoginScreen.routeName: (ctx) => LoginScreen(),
+              SignUpScreen.routeName: (ctx) => SignUpScreen(),
+              BottomBarScreen.routeName: (ctx) => BottomBarScreen(),
             },
           );
         }));

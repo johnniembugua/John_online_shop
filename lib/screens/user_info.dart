@@ -175,7 +175,21 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     switchActiveColor: Colors.indigo,
                     title: Text('Green theme'),
                   ),
-                  userListTile('Logout', '', 4, context),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Theme.of(context).splashColor,
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.canPop(context)
+                              ? Navigator.pop(context)
+                              : null;
+                        },
+                        title: Text('Logout'),
+                        leading: Icon(Icons.exit_to_app_rounded),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             )

@@ -8,6 +8,7 @@ import 'search.dart';
 import 'user_info.dart';
 
 class BottomBarScreen extends StatefulWidget {
+  static const routeName = '/BottomBarScreen';
   const BottomBarScreen({Key key}) : super(key: key);
 
   @override
