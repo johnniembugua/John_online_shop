@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
+import 'package:shopping_app2/inner_screens/upload_product_form.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/feeds.dart';
 import 'package:shopping_app2/screens/wishlist.dart';
@@ -141,7 +142,7 @@ class _BackLayerMenuState extends State<BackLayerMenu> {
                   height: 10,
                 ),
                 content(context, () {
-                  navigaTo(context, FeedsScreen.routeName);
+                  navigaTo(context, UploadProductForm.routeName);
                 }, 'Upload a new product', 3),
               ],
             ),

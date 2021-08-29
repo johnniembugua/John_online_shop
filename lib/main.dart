@@ -13,9 +13,11 @@ import 'package:shopping_app2/screens/auth/sign_up.dart';
 import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/landing_page.dart';
+import 'package:shopping_app2/screens/main_screen.dart';
 
 import 'inner_screens/brands_navigation_rail.dart';
 import 'inner_screens/categories_feeds.dart';
+import 'inner_screens/upload_product_form.dart';
 import 'screens/cart.dart';
 import 'screens/feeds.dart';
 import 'screens/wishlist.dart';
@@ -67,7 +69,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            home: LandingPage(),
+            home: MainScreen(),
             //initialRoute: '/',
             routes: {
               //   '/': (ctx) => LandingPage(),
@@ -83,6 +85,7 @@ class _MyAppState extends State<MyApp> {
               LoginScreen.routeName: (ctx) => LoginScreen(),
               SignUpScreen.routeName: (ctx) => SignUpScreen(),
               BottomBarScreen.routeName: (ctx) => BottomBarScreen(),
+              UploadProductForm.routeName: (ctx) => UploadProductForm(),
             },
           );
         }));
