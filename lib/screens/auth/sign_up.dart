@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -26,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   File _pickedImage;
   String url;
   final _formKey = GlobalKey<FormState>();
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   // GlobalMethods _globalMethods = GlobalMethods();
   bool _isLoading = false;
   @override
@@ -45,6 +46,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // var formattedDate = "${dateparse.day}-${dateparse.month}-${dateparse.year}";
     if (isValid) {
       _formKey.currentState.save();
+      _auth.createUserWithEmailAndPassword(
+          email: _emailAddress.toLowerCase().trim(),
+          password: _password.trim());
       // try {
       //   if (_pickedImage == null) {
       //     _globalMethods.authErrorHandle('Please pick an image', context);
