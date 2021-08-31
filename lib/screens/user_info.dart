@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
@@ -16,6 +17,7 @@ class UserInfoScreen extends StatefulWidget {
 class _UserInfoScreenState extends State<UserInfoScreen> {
   ScrollController _scrollController;
   var top = 0.0;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -180,10 +182,43 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     child: InkWell(
                       splashColor: Theme.of(context).splashColor,
                       child: ListTile(
-                        onTap: () {
-                          Navigator.canPop(context)
-                              ? Navigator.pop(context)
-                              : null;
+                        onTap: () async {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Image.network(
+                                          'https://image.flaticon.com/icons/png/128/1828/1828304.png',
+                                          height: 20.0,
+                                          width: 20,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Text('Sign Out'),
+                                      ),
+                                    ],
+                                  ),
+                                  content: Text("Do you want to sign out?"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () async {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel')),
+                                    TextButton(
+                                        onPressed: () async {
+                                          await _auth.signOut().then((value) =>
+                                              Navigator.pop(context));
+                                        },
+                                        child: Text('Ok')),
+                                  ],
+                                );
+                              });
                         },
                         title: Text('Logout'),
                         leading: Icon(Icons.exit_to_app_rounded),

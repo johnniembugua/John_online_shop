@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/services/global_method.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -18,8 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String _emailAddress = '';
   String _password = '';
   final _formKey = GlobalKey<FormState>();
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  // GlobalMethods _globalMethods = GlobalMethods();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  GlobalMethod _globalMethods = GlobalMethod();
   bool _isLoading = false;
   @override
   void dispose() {
@@ -32,25 +34,25 @@ class _LoginScreenState extends State<LoginScreen> {
     FocusScope.of(context).unfocus();
     if (isValid) {
       _formKey.currentState.save();
-      // setState(() {
-      //   _isLoading = true;
-      // });
+      setState(() {
+        _isLoading = true;
+      });
 
-      // try {
-      //   await _auth
-      //       .signInWithEmailAndPassword(
-      //           email: _emailAddress.toLowerCase().trim(),
-      //           password: _password.trim())
-      //       .then((value) =>
-      //           Navigator.canPop(context) ? Navigator.pop(context) : null);
-      // } catch (error) {
-      //   _globalMethods.authErrorHandle(error.message, context);
-      //   print('error occured ${error.message}');
-      // } finally {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      // }
+      try {
+        await _auth
+            .signInWithEmailAndPassword(
+                email: _emailAddress.toLowerCase().trim(),
+                password: _password.trim())
+            .then((value) =>
+                Navigator.canPop(context) ? Navigator.pop(context) : null);
+      } catch (error) {
+        _globalMethods.authErrorHandle(error.message, context);
+        print('error occured ${error.message}');
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 

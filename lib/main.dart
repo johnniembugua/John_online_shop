@@ -15,6 +15,7 @@ import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/landing_page.dart';
 import 'package:shopping_app2/screens/main_screen.dart';
+import 'package:shopping_app2/screens/user_state.dart';
 
 import 'inner_screens/brands_navigation_rail.dart';
 import 'inner_screens/categories_feeds.dart';
@@ -94,7 +95,7 @@ class _MyAppState extends State<MyApp> {
                   title: 'Flutter Demo',
                   theme:
                       Styles.themeData(themeChangeProvider.darkTheme, context),
-                  home: MainScreen(),
+                  home: UserState(),
                   //initialRoute: '/',
                   routes: {
                     //   '/': (ctx) => LandingPage(),

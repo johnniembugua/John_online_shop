@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/screens/auth/login.dart';
+import 'package:shopping_app2/services/global_method.dart';
 
 import 'auth/sign_up.dart';
 import 'bottom_bar.dart';
@@ -18,6 +21,8 @@ class _LandingPageState extends State<LandingPage>
     with TickerProviderStateMixin {
   AnimationController _animationController;
   Animation<double> _animation;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  GlobalMethod _globalMethod = GlobalMethod();
   List<String> images = [
     'https://media.istockphoto.com/photos/man-at-the-shopping-picture-id868718238?k=6&m=868718238&s=612x612&w=0&h=ZUPCx8Us3fGhnSOlecWIZ68y3H4rCiTnANtnjHk0bvo=',
     'https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F1138257321%2F0x0.jpg%3Ffit%3Dscale',
@@ -49,6 +54,24 @@ class _LandingPageState extends State<LandingPage>
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  Future<void> _googleSignIn() async {
+    final googleSignIn = GoogleSignIn();
+    final googleAccount = await googleSignIn.signIn();
+    if (googleAccount != null) {
+      final googleAuth = await googleAccount.authentication;
+      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
+        try {
+          final authResult = await _auth.signInWithCredential(
+              GoogleAuthProvider.credential(
+                  idToken: googleAuth.idToken,
+                  accessToken: googleAuth.accessToken));
+        } catch (error) {
+          _globalMethod.authErrorHandle(error.message, context);
+        }
+      }
+    }
   }
 
   @override
@@ -208,9 +231,7 @@ class _LandingPageState extends State<LandingPage>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               OutlineButton(
-                //onPressed: _googleSignIn,
-                onPressed: () {},
-
+                onPressed: _googleSignIn,
                 shape: StadiumBorder(),
                 highlightedBorderColor: Colors.red.shade200,
                 borderSide: BorderSide(width: 2, color: Colors.red),
