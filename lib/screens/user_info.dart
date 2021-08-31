@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -18,6 +19,12 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   ScrollController _scrollController;
   var top = 0.0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _uid;
+  String _name;
+  String _email;
+  String _joinedAt;
+  int _phoneNumber;
+  String _userImageUrl;
 
   @override
   void initState() {
@@ -25,6 +32,23 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       setState(() {});
+    });
+    getData();
+  }
+
+  void getData() async {
+    User user = _auth.currentUser;
+    _uid = user.uid;
+    user.email;
+    final DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+    setState(() {
+      _name = userDoc.get('name');
+      _email = user.email;
+      _joinedAt = userDoc.get('joinedAt');
+      _phoneNumber = userDoc.get('phoneNumber');
+      _userImageUrl = userDoc.get('imageUrl');
+      //print('name $_name');
     });
   }
 
@@ -85,8 +109,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     fit: BoxFit.fill,
-                                    image: AssetImage(
-                                        'assets/images/CatLaptops.png'),
+                                    image: NetworkImage(_userImageUrl ??
+                                        'https://images-na.ssl-images-amazon.com/images/I/51ME-ADMjRL._AC_SL1000_.jpg'),
                                   ),
                                 ),
                               ),
@@ -104,7 +128,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       ],
                     ),
                     background: Image(
-                      image: AssetImage('assets/images/CatLaptops.png'),
+                      //TODO:Change default imageUrl
+                      image: NetworkImage(_userImageUrl ??
+                          'https://images-na.ssl-images-amazon.com/images/I/51ME-ADMjRL._AC_SL1000_.jpg'),
                     ),
                   ),
                 );
@@ -154,11 +180,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     child: userTitle('User Information'),
                   ),
                   Divider(thickness: 1, color: Colors.grey),
-                  userListTile(
-                      'Email', 'johnniendungu321@gmail.com', 0, context),
-                  userListTile('Phone number', '0799005059', 1, context),
+                  userListTile('Email', '$_email' ?? '', 0, context),
+                  userListTile('Phone number', _phoneNumber.toString() ?? '', 1,
+                      context),
                   userListTile('shipping address', '', 2, context),
-                  userListTile('Joined date', 'date', 3, context),
+                  userListTile('Joined date', '$_joinedAt' ?? '', 3, context),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: userTitle('User Settings'),
