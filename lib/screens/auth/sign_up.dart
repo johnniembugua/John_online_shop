@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/services/global_method.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -28,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String url;
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  // GlobalMethods _globalMethods = GlobalMethods();
+  GlobalMethod _globalMethods = GlobalMethod();
   bool _isLoading = false;
   @override
   void dispose() {
@@ -46,48 +47,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // var formattedDate = "${dateparse.day}-${dateparse.month}-${dateparse.year}";
     if (isValid) {
       _formKey.currentState.save();
-      _auth.createUserWithEmailAndPassword(
-          email: _emailAddress.toLowerCase().trim(),
-          password: _password.trim());
-      // try {
-      //   if (_pickedImage == null) {
-      //     _globalMethods.authErrorHandle('Please pick an image', context);
-      //   } else {
-      //     setState(() {
-      //       _isLoading = true;
-      //     });
-      //     final ref = FirebaseStorage.instance
-      //         .ref()
-      //         .child('usersImages')
-      //         .child(_fullName + '.jpg');
-      //     await ref.putFile(_pickedImage);
-      //     url = await ref.getDownloadURL();
-      //     await _auth.createUserWithEmailAndPassword(
-      //         email: _emailAddress.toLowerCase().trim(),
-      //         password: _password.trim());
-      //     final User user = _auth.currentUser;
-      //     final _uid = user.uid;
-      //     user.updateProfile(photoURL: url, displayName: _fullName);
-      //     user.reload();
-      //     await FirebaseFirestore.instance.collection('users').doc(_uid).set({
-      //       'id': _uid,
-      //       'name': _fullName,
-      //       'email': _emailAddress,
-      //       'phoneNumber': _phoneNumber,
-      //       'imageUrl': url,
-      //       'joinedAt': formattedDate,
-      //       'createdAt': Timestamp.now(),
-      //     });
-      //     Navigator.canPop(context) ? Navigator.pop(context) : null;
-      //   }
-      // } catch (error) {
-      //   _globalMethods.authErrorHandle(error.message, context);
-      //   print('error occured ${error.message}');
-      // } finally {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      // }
+      setState(() {
+        _isLoading = true;
+      });
+
+      try {
+        // if (_pickedImage == null) {
+        //   _globalMethods.authErrorHandle('Please pick an image', context);
+        // } else {
+        //   setState(() {
+        //     _isLoading = true;
+        //   });
+        //   final ref = FirebaseStorage.instance
+        //       .ref()
+        //       .child('usersImages')
+        //       .child(_fullName + '.jpg');
+        //   await ref.putFile(_pickedImage);
+        //   url = await ref.getDownloadURL();
+        await _auth.createUserWithEmailAndPassword(
+            email: _emailAddress.toLowerCase().trim(),
+            password: _password.trim());
+        //   final User user = _auth.currentUser;
+        //   final _uid = user.uid;
+        //   user.updateProfile(photoURL: url, displayName: _fullName);
+        //   user.reload();
+        //   await FirebaseFirestore.instance.collection('users').doc(_uid).set({
+        //     'id': _uid,
+        //     'name': _fullName,
+        //     'email': _emailAddress,
+        //     'phoneNumber': _phoneNumber,
+        //     'imageUrl': url,
+        //     'joinedAt': formattedDate,
+        //     'createdAt': Timestamp.now(),
+        //   });
+        //   Navigator.canPop(context) ? Navigator.pop(context) : null;
+        // }
+      } catch (error) {
+        _globalMethods.authErrorHandle(error.message, context);
+        print('error occured ${error.message}');
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
