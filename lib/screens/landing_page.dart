@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class _LandingPageState extends State<LandingPage>
   Animation<double> _animation;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   GlobalMethod _globalMethod = GlobalMethod();
+  bool _isLoading = false;
   List<String> images = [
     'https://media.istockphoto.com/photos/man-at-the-shopping-picture-id868718238?k=6&m=868718238&s=612x612&w=0&h=ZUPCx8Us3fGhnSOlecWIZ68y3H4rCiTnANtnjHk0bvo=',
     'https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F1138257321%2F0x0.jpg%3Ffit%3Dscale',
@@ -63,14 +65,46 @@ class _LandingPageState extends State<LandingPage>
       final googleAuth = await googleAccount.authentication;
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
         try {
+          var date = DateTime.now().toString();
+          var dateparse = DateTime.parse(date);
+          var formattedDate =
+              "${dateparse.day}-${dateparse.month}-${dateparse.year}";
           final authResult = await _auth.signInWithCredential(
               GoogleAuthProvider.credential(
                   idToken: googleAuth.idToken,
                   accessToken: googleAuth.accessToken));
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(authResult.user.uid)
+              .set({
+            'id': authResult.user.uid,
+            'name': authResult.user.displayName,
+            'email': authResult.user.email,
+            'phoneNumber': authResult.user.phoneNumber,
+            'imageUrl': authResult.user.photoURL,
+            'joinedAt': formattedDate,
+            'createdAt': Timestamp.now(),
+          });
         } catch (error) {
           _globalMethod.authErrorHandle(error.message, context);
         }
       }
+    }
+  }
+
+  void _loginAnonymously() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await _auth.signInAnonymously();
+    } catch (error) {
+      _globalMethod.authErrorHandle(error.message, context);
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -237,15 +271,19 @@ class _LandingPageState extends State<LandingPage>
                 borderSide: BorderSide(width: 2, color: Colors.red),
                 child: Text('Google +'),
               ),
-              OutlineButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, BottomBarScreen.routeName);
-                },
-                shape: StadiumBorder(),
-                highlightedBorderColor: Colors.deepPurple.shade200,
-                borderSide: BorderSide(width: 2, color: Colors.deepPurple),
-                child: Text('Sign in as a guest'),
-              ),
+              _isLoading
+                  ? CircularProgressIndicator()
+                  : OutlineButton(
+                      onPressed: () {
+                        _loginAnonymously();
+                        // Navigator.pushNamed(context, BottomBarScreen.routeName);
+                      },
+                      shape: StadiumBorder(),
+                      highlightedBorderColor: Colors.deepPurple.shade200,
+                      borderSide:
+                          BorderSide(width: 2, color: Colors.deepPurple),
+                      child: Text('Sign in as a guest'),
+                    ),
             ],
           ),
           SizedBox(

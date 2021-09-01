@@ -40,16 +40,21 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
     User user = _auth.currentUser;
     _uid = user.uid;
     user.email;
-    final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(_uid).get();
-    setState(() {
-      _name = userDoc.get('name');
-      _email = user.email;
-      _joinedAt = userDoc.get('joinedAt');
-      _phoneNumber = userDoc.get('phoneNumber');
-      _userImageUrl = userDoc.get('imageUrl');
-      //print('name $_name');
-    });
+    final DocumentSnapshot userDoc = user.isAnonymous
+        ? null
+        : await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+    if (userDoc == null) {
+      return;
+    } else {
+      setState(() {
+        _name = userDoc.get('name');
+        _email = user.email;
+        _joinedAt = userDoc.get('joinedAt');
+        _phoneNumber = userDoc.get('phoneNumber');
+        _userImageUrl = userDoc.get('imageUrl');
+        //print('name $_name');
+      });
+    }
   }
 
   @override
@@ -118,7 +123,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                                 width: 12,
                               ),
                               Text(
-                                'Guest',
+                                _name == null ? 'Guest' : _name,
                                 style: TextStyle(
                                     fontSize: 20.0, color: Colors.white),
                               ),
@@ -131,6 +136,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       //TODO:Change default imageUrl
                       image: NetworkImage(_userImageUrl ??
                           'https://images-na.ssl-images-amazon.com/images/I/51ME-ADMjRL._AC_SL1000_.jpg'),
+                      fit: BoxFit.fill,
                     ),
                   ),
                 );
