@@ -1,10 +1,14 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopping_app2/consts/colors.dart';
+import 'package:shopping_app2/services/global_method.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -28,10 +32,11 @@ class _UploadProductFormState extends State<UploadProductForm> {
   final TextEditingController _brandController = TextEditingController();
   String _categoryValue;
   String _brandValue;
-  // GlobalMethods _globalMethods = GlobalMethods();
-  //final FirebaseAuth _auth = FirebaseAuth.instance;
-  File _pickedImage;
   bool _isLoading = false;
+  GlobalMethod _globalMethods = GlobalMethod();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  File _pickedImage;
+
   String url;
   var uuid = Uuid();
   showAlertDialog(BuildContext context, String title, String body) {
@@ -71,54 +76,54 @@ class _UploadProductFormState extends State<UploadProductForm> {
     }
     if (isValid) {
       _formKey.currentState.save();
-      // try {
-      //   if (_pickedImage == null) {
-      //     _globalMethods.authErrorHandle('Please pick an image', context);
-      //   } else {
-      //     setState(() {
-      //       _isLoading = true;
-      //     });
-      //     final ref = FirebaseStorage.instance
-      //         .ref()
-      //         .child('productsImages')
-      //         .child(_productTitle + '.jpg');
-      //     await ref.putFile(_pickedImage);
-      //     url = await ref.getDownloadURL();
+      try {
+        if (_pickedImage == null) {
+          _globalMethods.authErrorHandle('Please pick an image', context);
+        } else {
+          setState(() {
+            _isLoading = true;
+          });
+          final ref = FirebaseStorage.instance
+              .ref()
+              .child('productsImages')
+              .child(_productTitle + '.jpg');
+          await ref.putFile(_pickedImage);
+          url = await ref.getDownloadURL();
 
-      //     final User user = _auth.currentUser;
-      //     final _uid = user.uid;
-      //     final productId = uuid.v4();
-      //     await FirebaseFirestore.instance
-      //         .collection('products')
-      //         .doc(productId)
-      //         .set({
-      //       'productId': productId,
-      //       'productTitle': _productTitle,
-      //       'price': _productPrice,
-      //       'productImage': url,
-      //       'productCategory': _productCategory,
-      //       'productBrand': _productBrand,
-      //       'productDescription': _productDescription,
-      //       'productQuantity': _productQuantity,
-      //       'userId': _uid,
-      //       'createdAt': Timestamp.now(),
-      //     });
-      //     Navigator.canPop(context) ? Navigator.pop(context) : null;
-      //   }
-      // } catch (error) {
-      //   _globalMethods.authErrorHandle(error.message, context);
-      //   print('error occured ${error.message}');
-      // } finally {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      // }
+          final User user = _auth.currentUser;
+          final _uid = user.uid;
+          final productId = uuid.v4();
+          await FirebaseFirestore.instance
+              .collection('products')
+              .doc(productId)
+              .set({
+            'productId': productId,
+            'productTitle': _productTitle,
+            'price': _productPrice,
+            'productImage': url,
+            'productCategory': _productCategory,
+            'productBrand': _productBrand,
+            'productDescription': _productDescription,
+            'productQuantity': _productQuantity,
+            'userId': _uid,
+            'createdAt': Timestamp.now(),
+          });
+          Navigator.canPop(context) ? Navigator.pop(context) : null;
+        }
+      } catch (error) {
+        _globalMethods.authErrorHandle(error.message, context);
+        print('error occured ${error.message}');
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
   void _pickImageCamera() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.getImage(
+    final pickedImage = await picker.pickImage(
       source: ImageSource.camera,
       imageQuality: 40,
     );
@@ -131,7 +136,7 @@ class _UploadProductFormState extends State<UploadProductForm> {
 
   void _pickImageGallery() async {
     final picker = ImagePicker();
-    final pickedImage = await picker.getImage(
+    final pickedImage = await picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 50,
     );
@@ -247,7 +252,7 @@ class _UploadProductFormState extends State<UploadProductForm> {
                             Flexible(
                               flex: 1,
                               child: TextFormField(
-                                key: ValueKey('Price \$'),
+                                key: ValueKey('Price Ksh'),
                                 keyboardType: TextInputType.number,
                                 validator: (value) {
                                   if (value.isEmpty) {
@@ -260,7 +265,7 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                       RegExp(r'[0-9]')),
                                 ],
                                 decoration: InputDecoration(
-                                  labelText: 'Price \$',
+                                  labelText: 'Price Ksh',
                                   //  prefixIcon: Icon(Icons.mail),
                                   // suffixIcon: Text(
                                   //   '\n \n \$',

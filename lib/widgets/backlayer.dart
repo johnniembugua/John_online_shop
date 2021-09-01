@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
-import 'package:shopping_app2/inner_screens/upload_product_form.dart';
+import 'package:shopping_app2/screens/upload_product_form.dart';
 import 'package:shopping_app2/screens/cart.dart';
 import 'package:shopping_app2/screens/feeds.dart';
 import 'package:shopping_app2/screens/wishlist.dart';

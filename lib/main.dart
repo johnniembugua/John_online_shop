@@ -9,6 +9,7 @@ import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 //import 'package:shopping_app2/screens/bottom_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app2/screens/auth/forget_password.dart';
 import 'package:shopping_app2/screens/auth/login.dart';
 import 'package:shopping_app2/screens/auth/sign_up.dart';
 import 'package:shopping_app2/screens/bottom_bar.dart';
@@ -19,7 +20,7 @@ import 'package:shopping_app2/screens/user_state.dart';
 
 import 'inner_screens/brands_navigation_rail.dart';
 import 'inner_screens/categories_feeds.dart';
-import 'inner_screens/upload_product_form.dart';
+import 'screens/upload_product_form.dart';
 import 'screens/cart.dart';
 import 'screens/feeds.dart';
 import 'screens/wishlist.dart';
@@ -112,6 +113,8 @@ class _MyAppState extends State<MyApp> {
                     SignUpScreen.routeName: (ctx) => SignUpScreen(),
                     BottomBarScreen.routeName: (ctx) => BottomBarScreen(),
                     UploadProductForm.routeName: (ctx) => UploadProductForm(),
+                    ForgetPassword.routeName: (ctx) => ForgetPassword(),
+                    MainScreen.routeName: (ctx) => MainScreen(),
                   },
                 );
               }));
