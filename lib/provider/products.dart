@@ -24,7 +24,7 @@ class Products with ChangeNotifier {
               price: double.parse(element.get('price')),
               imageUrl: element.get('productImage'),
               brand: element.get('productBrand'),
-              productCategoryName: element.get('producCategory'),
+              productCategoryName: element.get('productCategory'),
               quantity: int.parse(element.get('productQuantity')),
               isPopular: true,
             ));

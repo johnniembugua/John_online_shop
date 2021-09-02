@@ -38,11 +38,18 @@ class _CartScreenState extends State<CartScreen> {
         currency: 'USD', amount: amount.toString());
     await dialog.hide();
     print('response: ${response.success}');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(response.message),
+        duration:
+            Duration(milliseconds: response.success == true ? 1500 : 3000),
+      ),
+    );
 
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(response.message),
-      duration: Duration(milliseconds: response.success == true ? 1500 : 3000),
-    ));
+    // Scaffold.of(context).showSnackBar(SnackBar(
+    //   content: Text(response.message),
+    //   duration: Duration(milliseconds: response.success == true ? 1500 : 3000),
+    // ));
   }
 
   GlobalMethod globalMethod = GlobalMethod();

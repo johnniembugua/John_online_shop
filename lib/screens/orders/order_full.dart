@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app2/consts/colors.dart';
+
 import 'package:shopping_app2/inner_screens/product_detail.dart';
-import 'package:shopping_app2/models/cart_attr.dart';
+
 import 'package:shopping_app2/models/order_attr.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
-import 'package:shopping_app2/provider/order_provider.dart';
+
 import 'package:shopping_app2/services/global_method.dart';
 
 class OrderFull extends StatefulWidget {

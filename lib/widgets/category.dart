@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app2/inner_screens/categories_feeds.dart';
-import 'package:shopping_app2/screens/feeds.dart';
 
 class CategoryWidget extends StatefulWidget {
   CategoryWidget({this.index});

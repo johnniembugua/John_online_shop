@@ -36,7 +36,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                     borderRadius: BorderRadius.circular(4),
                     child: Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.3,
+                      height: 150,
                       child: Image.network(
                         productAttributes.imageUrl,
                         fit: BoxFit.fitWidth,

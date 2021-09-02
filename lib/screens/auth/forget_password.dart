@@ -37,6 +37,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 textColor: Colors.white,
                 fontSize: 16.0));
 
+        // ignore: unnecessary_statements
         Navigator.canPop(context) ? Navigator.pop(context) : null;
       } catch (error) {
         _globalMethods.authErrorHandle(error.message, context);
@@ -114,7 +115,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         side: BorderSide(color: Theme.of(context).cardColor),
                       ),
                     )),
-                    onPressed:  _submitForm, 
+                    onPressed: _submitForm,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

@@ -84,6 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             'joinedAt': formattedDate,
             'createdAt': Timestamp.now(),
           });
+          // ignore: unnecessary_statements
           Navigator.canPop(context) ? Navigator.pop(context) : null;
         }
       } catch (error) {

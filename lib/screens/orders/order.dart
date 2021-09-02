@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app2/consts/colors.dart';
+
 import 'package:shopping_app2/consts/my_icons.dart';
-import 'package:shopping_app2/provider/cart_provider.dart';
+
 import 'package:shopping_app2/provider/order_provider.dart';
-import 'package:shopping_app2/screens/cart/cart_empty.dart';
-import 'package:shopping_app2/screens/cart/cart_full.dart';
+
 import 'package:shopping_app2/services/global_method.dart';
 import 'package:shopping_app2/services/payment.dart';
 

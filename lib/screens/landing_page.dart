@@ -10,7 +10,6 @@ import 'package:shopping_app2/screens/auth/login.dart';
 import 'package:shopping_app2/services/global_method.dart';
 
 import 'auth/sign_up.dart';
-import 'bottom_bar.dart';
 
 class LandingPage extends StatefulWidget {
   static const routeName = '/LandingPage';
