@@ -4,7 +4,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/inner_screens/product_detail.dart';
 import 'package:shopping_app2/models/product.dart';
-import 'package:shopping_app2/provider/products.dart';
+
 import 'package:shopping_app2/widgets/feeds_dialog.dart';
 
 class FeedsProduct extends StatefulWidget {

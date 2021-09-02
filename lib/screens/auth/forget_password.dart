@@ -39,8 +39,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
         Navigator.canPop(context) ? Navigator.pop(context) : null;
       } catch (error) {
-        _globalMethods.authErrorHandle(error.m essage, context);
-        // print('error occured ${error .message}');
+        _globalMethods.authErrorHandle(error.message, context);
+        // print('error occured ${error.message}');
       } finally {
         setState(() {
           _isLoading = false;
