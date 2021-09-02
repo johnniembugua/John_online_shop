@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
@@ -6,8 +8,10 @@ import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/services/global_method.dart';
 import 'package:shopping_app2/services/payment.dart';
-import 'package:shopping_app2/widgets/cart_empty.dart';
-import 'package:shopping_app2/widgets/cart_full.dart';
+import 'package:uuid/uuid.dart';
+
+import 'cart_empty.dart';
+import 'cart_full.dart';
 
 class CartScreen extends StatefulWidget {
   static const routeName = '/CartScreen';
@@ -82,6 +86,9 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Widget checkoutSection(BuildContext ctx, double subTotal) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    var uuid = Uuid();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -113,10 +120,34 @@ class _CartScreenState extends State<CartScreen> {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(30),
-                    onTap: () {
-                      double amountInCents = subTotal * 1000;
-                      int integerAmount = (amountInCents / 10).ceil();
-                      payWithCard(integerAmount);
+                    onTap: () async {
+                      // double amountInCents = subTotal * 1000;
+                      // int integerAmount = (amountInCents / 10).ceil();
+                      // payWithCard(integerAmount);
+
+                      User user = _auth.currentUser;
+                      final _uid = user.uid;
+                      cartProvider.getCartItems
+                          .forEach((key, orderValue) async {
+                        final orderId = uuid.v4();
+                        try {
+                          await FirebaseFirestore.instance
+                              .collection('order')
+                              .doc(orderId)
+                              .set({
+                            'orderId': orderId,
+                            'userId': _uid,
+                            'productId': orderValue.productId,
+                            'title': orderValue.title,
+                            'price': orderValue.price * orderValue.quantity,
+                            'imageUrl': orderValue.imageUrl,
+                            'quantity': orderValue.quantity,
+                            'orderDate': Timestamp.now(),
+                          });
+                        } catch (error) {
+                          print('error occured $error');
+                        }
+                      });
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

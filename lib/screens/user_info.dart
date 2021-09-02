@@ -7,8 +7,10 @@ import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app2/screens/cart.dart';
-import 'package:shopping_app2/screens/wishlist.dart';
+import 'package:shopping_app2/screens/cart/cart.dart';
+import 'package:shopping_app2/screens/wishlist/wishlist.dart';
+
+import 'orders/order.dart';
 
 class UserInfoScreen extends StatefulWidget {
   @override
@@ -178,6 +180,19 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         title: Text('Cart'),
                         trailing: Icon(Icons.chevron_right_rounded),
                         leading: Icon(MyAppIcons.cart),
+                      ),
+                    ),
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Theme.of(context).splashColor,
+                      child: ListTile(
+                        onTap: () => Navigator.of(context)
+                            .pushNamed(OrderScreen.routeName),
+                        title: Text('My Orders'),
+                        trailing: Icon(Icons.chevron_right_rounded),
+                        leading: Icon(MyAppIcons.bag),
                       ),
                     ),
                   ),

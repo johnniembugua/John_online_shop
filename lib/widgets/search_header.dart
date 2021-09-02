@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/fav_provider.dart';
-import 'package:shopping_app2/screens/cart.dart';
+import 'package:shopping_app2/screens/cart/cart.dart';
 import 'package:shopping_app2/screens/user_info.dart';
-import 'package:shopping_app2/screens/wishlist.dart';
+import 'package:shopping_app2/screens/wishlist/wishlist.dart';
 
 class SearchByHeader extends SliverPersistentHeaderDelegate {
   final double flexibleSpace;

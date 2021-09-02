@@ -9,8 +9,8 @@ import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
 import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
-import 'package:shopping_app2/screens/cart.dart';
-import 'package:shopping_app2/screens/wishlist.dart';
+import 'package:shopping_app2/screens/cart/cart.dart';
+import 'package:shopping_app2/screens/wishlist/wishlist.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -251,7 +251,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: double.infinity,
                   height: 340,
                   child: ListView.builder(
-                      itemCount: productList.length<7?productList.length:7,
+                      itemCount:
+                          productList.length < 7 ? productList.length : 7,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext ctx, int index) {
                         return ChangeNotifierProvider.value(

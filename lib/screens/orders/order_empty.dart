@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/screens/feeds.dart';
 
-class CartEmpty extends StatelessWidget {
-  const CartEmpty({Key key}) : super(key: key);
+class OrderEmpty extends StatelessWidget {
+  const OrderEmpty({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,13 @@ class CartEmpty extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: AssetImage('assets/images/emptycart.png'),
+              image: NetworkImage(
+                  'https://image.flaticon.com/icons/png/128/3759/3759041.png'),
             ),
           ),
         ),
         Text(
-          'Your Cart Is Empty',
+          'No Order made',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Theme.of(context).textSelectionColor,
@@ -36,7 +38,7 @@ class CartEmpty extends StatelessWidget {
           height: 20,
         ),
         Text(
-          'Looks like you didn\'t \n add anything to your cart yet',
+          'Looks like you didn\'t \n order anything yet',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: themeChange.darkTheme
@@ -53,14 +55,16 @@ class CartEmpty extends StatelessWidget {
           width: MediaQuery.of(context).size.width * .9,
           height: MediaQuery.of(context).size.height * 0.06,
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, FeedsScreen.routeName);
+            },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
               side: BorderSide(color: Colors.red),
             ),
             color: Colors.redAccent,
             child: Text(
-              'Shop Now'.toUpperCase(),
+              'Order Now'.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Theme.of(context).textSelectionColor,

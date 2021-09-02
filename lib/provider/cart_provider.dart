@@ -23,6 +23,7 @@ class CartProvider with ChangeNotifier {
           productId,
           (existingCartItem) => CartAttr(
                 id: existingCartItem.id,
+                productId: existingCartItem.productId,
                 title: existingCartItem.title,
                 price: existingCartItem.price,
                 quantity: existingCartItem.quantity + 1,
@@ -33,6 +34,7 @@ class CartProvider with ChangeNotifier {
           productId,
           () => CartAttr(
                 id: DateTime.now().toString(),
+                productId: productId,
                 title: title,
                 price: price,
                 quantity: 1,
@@ -47,6 +49,7 @@ class CartProvider with ChangeNotifier {
       _cartItems.update(
           productId,
           (existingCartItem) => CartAttr(
+                productId: existingCartItem.productId,
                 id: existingCartItem.id,
                 title: existingCartItem.title,
                 price: existingCartItem.price,

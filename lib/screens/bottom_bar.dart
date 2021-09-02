@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 
-import 'cart.dart';
+import 'cart/cart.dart';
 import 'feeds.dart';
 import 'home.dart';
 import 'search.dart';

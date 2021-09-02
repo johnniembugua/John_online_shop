@@ -7,10 +7,10 @@ import 'package:shopping_app2/models/product.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
-import 'package:shopping_app2/screens/wishlist.dart';
+import 'package:shopping_app2/screens/wishlist/wishlist.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
 
-import 'cart.dart';
+import 'cart/cart.dart';
 
 class FeedsScreen extends StatelessWidget {
   static const routeName = '/Feeds';

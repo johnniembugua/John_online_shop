@@ -13,17 +13,18 @@ import 'package:shopping_app2/screens/auth/forget_password.dart';
 import 'package:shopping_app2/screens/auth/login.dart';
 import 'package:shopping_app2/screens/auth/sign_up.dart';
 import 'package:shopping_app2/screens/bottom_bar.dart';
-import 'package:shopping_app2/screens/cart.dart';
+import 'package:shopping_app2/screens/cart/cart.dart';
 import 'package:shopping_app2/screens/landing_page.dart';
 import 'package:shopping_app2/screens/main_screen.dart';
+import 'package:shopping_app2/screens/orders/order.dart';
 import 'package:shopping_app2/screens/user_state.dart';
 
 import 'inner_screens/brands_navigation_rail.dart';
 import 'inner_screens/categories_feeds.dart';
 import 'screens/upload_product_form.dart';
-import 'screens/cart.dart';
+import 'screens/cart/cart.dart';
 import 'screens/feeds.dart';
-import 'screens/wishlist.dart';
+import 'screens/wishlist/wishlist.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -115,6 +116,7 @@ class _MyAppState extends State<MyApp> {
                     UploadProductForm.routeName: (ctx) => UploadProductForm(),
                     ForgetPassword.routeName: (ctx) => ForgetPassword(),
                     MainScreen.routeName: (ctx) => MainScreen(),
+                    OrderScreen.routeName: (ctx) => OrderScreen(),
                   },
                 );
               }));

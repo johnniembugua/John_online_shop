@@ -4,8 +4,8 @@ import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/services/global_method.dart';
 
-import 'package:shopping_app2/widgets/wishlist_empty.dart';
-import 'package:shopping_app2/widgets/wishlist_full.dart';
+import 'wishlist_empty.dart';
+import 'wishlist_full.dart';
 
 class WishlistScreen extends StatelessWidget {
   static const routeName = '/WishlistScreen';
