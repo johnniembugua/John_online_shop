@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class OrderFull extends StatefulWidget {
 }
 
 class _OrderFullState extends State<OrderFull> {
+  bool _isLoading = false;
   GlobalMethod globalMethod = GlobalMethod();
   @override
   Widget build(BuildContext context) {
@@ -75,22 +77,29 @@ class _OrderFullState extends State<OrderFull> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(32.0),
                               onTap: () {
-                                // globalMethod.showDialogg(
-                                //     'Remove item!',
-                                //     'Product will be removed from the cart',
-                                //     () => cartProvider
-                                //         .removeItem(orderAttr.productId),
-                                //     context);
+                                globalMethod.showDialogg(
+                                    'Cancel Order!', 'Order will be cancelled',
+                                    () async {
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await FirebaseFirestore.instance
+                                      .collection('order')
+                                      .doc(orderAttr.orderId)
+                                      .delete();
+                                }, context);
                               },
                               //splashColor: ,
                               child: Container(
                                 height: 50,
                                 width: 50,
-                                child: Icon(
-                                  Entypo.cross,
-                                  color: Colors.red,
-                                  size: 22,
-                                ),
+                                child: _isLoading
+                                    ? CircularProgressIndicator()
+                                    : Icon(
+                                        Entypo.cross,
+                                        color: Colors.red,
+                                        size: 22,
+                                      ),
                               ),
                             ),
                           )

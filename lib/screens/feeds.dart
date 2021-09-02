@@ -12,8 +12,19 @@ import 'package:shopping_app2/widgets/feeds_products.dart';
 
 import 'cart/cart.dart';
 
-class FeedsScreen extends StatelessWidget {
+class FeedsScreen extends StatefulWidget {
   static const routeName = '/Feeds';
+
+  @override
+  _FeedsScreenState createState() => _FeedsScreenState();
+}
+
+class _FeedsScreenState extends State<FeedsScreen> {
+  Future<void> _getProductsOnRefresh() async {
+    await Provider.of<Products>(context, listen: false).fetchProducts();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final popular = ModalRoute.of(context).settings.arguments as String;
@@ -71,15 +82,18 @@ class FeedsScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 240 / 320,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          children: List.generate(productList.length, (index) {
-            return ChangeNotifierProvider.value(
-                value: productList[index], child: FeedsProduct());
-          }),
+        body: RefreshIndicator(
+          onRefresh: _getProductsOnRefresh,
+          child: GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 240 / 320,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            children: List.generate(productList.length, (index) {
+              return ChangeNotifierProvider.value(
+                  value: productList[index], child: FeedsProduct());
+            }),
+          ),
         )
 //         StaggeredGridView.countBuilder(
 //           padding: ,

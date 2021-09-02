@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 
@@ -219,13 +220,31 @@ class ContentSpace extends StatelessWidget {
         child: MediaQuery.removePadding(
           removeTop: true,
           context: context,
-          child: ListView.builder(
-            itemCount: productsBrands.length,
-            itemBuilder: (BuildContext context, int index) =>
-                ChangeNotifierProvider.value(
-                    value: productsBrands[index],
-                    child: BrandsNavigationRail()),
-          ),
+          child: productsBrands.isEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Feather.database,
+                      size: 40,
+                    ),
+                    SizedBox(height: 40),
+                    Text(
+                      'No products for this brand',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    )
+                  ],
+                )
+              : ListView.builder(
+                  itemCount: productsBrands.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      ChangeNotifierProvider.value(
+                          value: productsBrands[index],
+                          child: BrandsNavigationRail()),
+                ),
         ),
       ),
     );

@@ -48,30 +48,30 @@ class _OrderScreenState extends State<OrderScreen> {
     final orderProvider = Provider.of<OrdersProvider>(context);
     bool isOrder = false;
 
-    return isOrder
-        ? Scaffold(
-            body: OrderEmpty(),
-          )
-        : Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).backgroundColor,
-              title: Text('Orders ()'),
-              actions: [
-                IconButton(
-                    icon: Icon(MyAppIcons.trash),
-                    onPressed: () {
-                      // globalMethod.showDialogg(
-                      //     'Clear cart!',
-                      //     'Your Cart Will be cleared',
-                      //     () => cartProvider.clearCart(),
-                      //     context);
-                    })
-              ],
-            ),
-            body: FutureBuilder(
-                future: orderProvider.fetchOrders(),
-                builder: (context, snapshot) {
-                  return Container(
+    return FutureBuilder(
+        future: orderProvider.fetchOrders(),
+        builder: (context, snapshot) {
+          return orderProvider.getOrders.isEmpty
+              ? Scaffold(
+                  body: OrderEmpty(),
+                )
+              : Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Theme.of(context).backgroundColor,
+                    title: Text('Orders (${orderProvider.getOrders.length})'),
+                    actions: [
+                      IconButton(
+                          icon: Icon(MyAppIcons.trash),
+                          onPressed: () {
+                            // globalMethod.showDialogg(
+                            //     'Clear cart!',
+                            //     'Your Cart Will be cleared',
+                            //     () => cartProvider.clearCart(),
+                            //     context);
+                          })
+                    ],
+                  ),
+                  body: Container(
                     margin: EdgeInsets.only(bottom: 60),
                     child: ListView.builder(
                       itemBuilder: (BuildContext ctx, int index) {
@@ -81,8 +81,8 @@ class _OrderScreenState extends State<OrderScreen> {
                       },
                       itemCount: orderProvider.getOrders.length,
                     ),
-                  );
-                }),
-          );
+                  ),
+                );
+        });
   }
 }

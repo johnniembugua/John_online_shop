@@ -28,13 +28,16 @@ class _CartScreenState extends State<CartScreen> {
     StripeService.init();
   }
 
-  void payWithCard(int amount) async {
+  var response;
+
+  Future<void> payWithCard(int amount) async {
     ProgressDialog dialog = ProgressDialog(context);
     dialog.style(message: 'Please wait ...');
     await dialog.show();
-    var response = await StripeService.payWithCard(
+    response = await StripeService.payWithCard(
         currency: 'USD', amount: amount.toString());
     await dialog.hide();
+    print('response: ${response.success}');
 
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(response.message),
@@ -42,9 +45,9 @@ class _CartScreenState extends State<CartScreen> {
     ));
   }
 
+  GlobalMethod globalMethod = GlobalMethod();
   @override
   Widget build(BuildContext context) {
-    GlobalMethod globalMethod = GlobalMethod();
     final cartProvider = Provider.of<CartProvider>(context);
 
     return cartProvider.getCartItems.isEmpty
@@ -121,33 +124,37 @@ class _CartScreenState extends State<CartScreen> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(30),
                     onTap: () async {
-                      // double amountInCents = subTotal * 1000;
-                      // int integerAmount = (amountInCents / 10).ceil();
-                      // payWithCard(integerAmount);
-
-                      User user = _auth.currentUser;
-                      final _uid = user.uid;
-                      cartProvider.getCartItems
-                          .forEach((key, orderValue) async {
-                        final orderId = uuid.v4();
-                        try {
-                          await FirebaseFirestore.instance
-                              .collection('order')
-                              .doc(orderId)
-                              .set({
-                            'orderId': orderId,
-                            'userId': _uid,
-                            'productId': orderValue.productId,
-                            'title': orderValue.title,
-                            'price': orderValue.price * orderValue.quantity,
-                            'imageUrl': orderValue.imageUrl,
-                            'quantity': orderValue.quantity,
-                            'orderDate': Timestamp.now(),
-                          });
-                        } catch (error) {
-                          print('error occured $error');
-                        }
-                      });
+                      double amountInCents = subTotal * 1000;
+                      int integerAmount = (amountInCents / 10).ceil();
+                      await payWithCard(integerAmount);
+                      if (response.success == true) {
+                        User user = _auth.currentUser;
+                        final _uid = user.uid;
+                        cartProvider.getCartItems
+                            .forEach((key, orderValue) async {
+                          final orderId = uuid.v4();
+                          try {
+                            await FirebaseFirestore.instance
+                                .collection('order')
+                                .doc(orderId)
+                                .set({
+                              'orderId': orderId,
+                              'userId': _uid,
+                              'productId': orderValue.productId,
+                              'title': orderValue.title,
+                              'price': orderValue.price * orderValue.quantity,
+                              'imageUrl': orderValue.imageUrl,
+                              'quantity': orderValue.quantity,
+                              'orderDate': Timestamp.now(),
+                            });
+                          } catch (error) {
+                            print('error occured $error');
+                          }
+                        });
+                      } else {
+                        globalMethod.authErrorHandle(
+                            'Please enter genuine credentials', context);
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
