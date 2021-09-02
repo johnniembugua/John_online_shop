@@ -1,15 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/provider/cart_provider.dart';
 import 'package:shopping_app2/services/global_method.dart';
+import 'package:shopping_app2/services/payment.dart';
 import 'package:shopping_app2/widgets/cart_empty.dart';
 import 'package:shopping_app2/widgets/cart_full.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   static const routeName = '/CartScreen';
   const CartScreen({Key key}) : super(key: key);
+
+  @override
+  _CartScreenState createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  @override
+  void initState() {
+    super.initState();
+    StripeService.init();
+  }
+
+  void payWithCard(int amount) async {
+    ProgressDialog dialog = ProgressDialog(context);
+    dialog.style(message: 'Please wait ...');
+    await dialog.show();
+    var response = await StripeService.payWithCard(
+        currency: 'USD', amount: amount.toString());
+    await dialog.hide();
+
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(response.message),
+      duration: Duration(milliseconds: response.success == true ? 1500 : 3000),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +113,11 @@ class CartScreen extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(30),
-                    onTap: () {},
+                    onTap: () {
+                      double amountInCents = subTotal * 1000;
+                      int integerAmount = (amountInCents / 10).ceil();
+                      payWithCard(integerAmount);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
