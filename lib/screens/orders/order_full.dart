@@ -6,8 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app2/inner_screens/product_detail.dart';
 
 import 'package:shopping_app2/models/order_attr.dart';
-import 'package:shopping_app2/provider/cart_provider.dart';
-import 'package:shopping_app2/provider/dark_theme_provider.dart';
+import 'package:shopping_app2/provider/order_provider.dart';
 
 import 'package:shopping_app2/services/global_method.dart';
 
@@ -23,9 +22,10 @@ class _OrderFullState extends State<OrderFull> {
   GlobalMethod globalMethod = GlobalMethod();
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
-    final themeChange = Provider.of<DarkThemeProvider>(context);
+    // final cartProvider = Provider.of<CartProvider>(context);
+    // final themeChange = Provider.of<DarkThemeProvider>(context);
     final orderAttr = Provider.of<OrdersAttr>(context);
+    //final orderProvider = Provider.of<OrdersProvider>(context);
 
     return InkWell(
       onTap: () {
@@ -82,7 +82,7 @@ class _OrderFullState extends State<OrderFull> {
                                     () async {
                                   setState(() {
                                     _isLoading = true;
-                                  });
+                                  }); 
                                   await FirebaseFirestore.instance
                                       .collection('order')
                                       .doc(orderAttr.orderId)
@@ -125,7 +125,7 @@ class _OrderFullState extends State<OrderFull> {
                             width: 5,
                           ),
                           Text(
-                            '${orderAttr.quantity}',
+                            'x${orderAttr.quantity}',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
@@ -142,6 +142,21 @@ class _OrderFullState extends State<OrderFull> {
                               '${orderAttr.orderId}',
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Flexible(child: Text('Order Date')),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Flexible(
+                            child: Text(
+                              '${orderAttr.orderDate}',
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.w600),
                             ),
                           ),
                         ],

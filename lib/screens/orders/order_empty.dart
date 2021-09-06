@@ -5,8 +5,6 @@ import 'package:shopping_app2/provider/dark_theme_provider.dart';
 import 'package:shopping_app2/screens/feeds.dart';
 
 class OrderEmpty extends StatelessWidget {
-  const OrderEmpty({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
@@ -21,42 +19,41 @@ class OrderEmpty extends StatelessWidget {
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(
-                  'https://image.flaticon.com/icons/png/128/3759/3759041.png'),
+                'https://image.flaticon.com/icons/png/128/3759/3759041.png',
+              ),
             ),
           ),
         ),
         Text(
-          'No Order made',
+          'Your order is Empty',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Theme.of(context).textSelectionColor,
-            fontSize: 36,
-            fontWeight: FontWeight.w600,
-          ),
+              color: Theme.of(context).textSelectionColor,
+              fontSize: 36,
+              fontWeight: FontWeight.w600),
         ),
         SizedBox(
-          height: 20,
+          height: 30,
         ),
         Text(
-          'Looks like you didn\'t \n order anything yet',
+          'Looks Like You didn\'t \n order anything yet',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: themeChange.darkTheme
-                ? Theme.of(context).disabledColor
-                : ColorsConsts.subTitle,
-            fontSize: 26,
-            fontWeight: FontWeight.w600,
-          ),
+              color: themeChange.darkTheme
+                  ? Theme.of(context).disabledColor
+                  : ColorsConsts.subTitle,
+              fontSize: 26,
+              fontWeight: FontWeight.w600),
         ),
         SizedBox(
-          height: 30.0,
+          height: 30,
         ),
         Container(
-          width: MediaQuery.of(context).size.width * .9,
+          width: MediaQuery.of(context).size.width * 0.9,
           height: MediaQuery.of(context).size.height * 0.06,
           child: RaisedButton(
             onPressed: () {
-              Navigator.pushNamed(context, FeedsScreen.routeName);
+              Navigator.of(context).pushNamed(FeedsScreen.routeName);
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -64,13 +61,12 @@ class OrderEmpty extends StatelessWidget {
             ),
             color: Colors.redAccent,
             child: Text(
-              'Order Now'.toUpperCase(),
+              'Shop now'.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Theme.of(context).textSelectionColor,
-                fontSize: 26,
-                fontWeight: FontWeight.w600,
-              ),
+                  color: Theme.of(context).textSelectionColor,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w600),
             ),
           ),
         ),

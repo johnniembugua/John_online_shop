@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
                   builder: (context, themeData, child) {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
-                  title: 'Flutter Demo',
+                  title: 'Milk Shop',
                   theme:
                       Styles.themeData(themeChangeProvider.darkTheme, context),
                   home: UserState(),

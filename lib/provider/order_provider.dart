@@ -10,7 +10,7 @@ class OrdersProvider with ChangeNotifier {
   }
 
   Future<void> fetchOrders() async {
-    FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     User _user = _auth.currentUser;
     var _uid = _user.uid;
     print('the user Id is equal to $_uid');
@@ -19,25 +19,26 @@ class OrdersProvider with ChangeNotifier {
           .collection('order')
           .where('userId', isEqualTo: _uid)
           .get()
-          .then((QuerySnapshot ordersSnapShot) {
+          .then((QuerySnapshot ordersSnapshot) {
         _orders.clear();
-        ordersSnapShot.docs.forEach((element) {
+        ordersSnapshot.docs.forEach((element) {
+          // print('element.get(productBrand), ${element.get('productBrand')}');
           _orders.insert(
               0,
               OrdersAttr(
                 orderId: element.get('orderId'),
-                userId: element.get('userId'),
                 productId: element.get('productId'),
-                title: element.get('title'),
-                imageUrl: element.get('imageUrl'),
+                userId: element.get('userId'),
                 price: element.get('price'.toString()),
                 quantity: element.get('quantity'.toString()),
+                imageUrl: element.get('imageUrl'),
+                title: element.get('title'),
                 orderDate: element.get('orderDate'),
               ));
         });
       });
     } catch (error) {
-      print('Error when fetching orders$error');
+      print('Printing error while fetching order $error');
     }
     notifyListeners();
   }

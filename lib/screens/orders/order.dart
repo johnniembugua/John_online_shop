@@ -45,7 +45,6 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     GlobalMethod globalMethod = GlobalMethod();
     final orderProvider = Provider.of<OrdersProvider>(context);
-    bool isOrder = false;
 
     return FutureBuilder(
         future: orderProvider.fetchOrders(),
@@ -60,14 +59,15 @@ class _OrderScreenState extends State<OrderScreen> {
                     title: Text('Orders (${orderProvider.getOrders.length})'),
                     actions: [
                       IconButton(
-                          icon: Icon(MyAppIcons.trash),
-                          onPressed: () {
-                            // globalMethod.showDialogg(
-                            //     'Clear cart!',
-                            //     'Your Cart Will be cleared',
-                            //     () => cartProvider.clearCart(),
-                            //     context);
-                          })
+                        icon: Icon(MyAppIcons.trash),
+                        onPressed: () {
+                          // globalMethod.showDialogg(
+                          //     'Clear cart!',
+                          //     'Your Cart Will be cleared',
+                          //     () => cartProvider.clearCart(),
+                          //     context);
+                        },
+                      )
                     ],
                   ),
                   body: Container(
@@ -76,7 +76,9 @@ class _OrderScreenState extends State<OrderScreen> {
                       itemBuilder: (BuildContext ctx, int index) {
                         return ChangeNotifierProvider.value(
                             value: orderProvider.getOrders[index],
-                            child: OrderFull());
+                            builder: (context, snapshot) {
+                              return OrderFull();
+                            });
                       },
                       itemCount: orderProvider.getOrders.length,
                     ),
