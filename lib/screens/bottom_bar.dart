@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
+import 'package:shopping_app2/screens/upload_product_form.dart';
 
 import 'cart/cart.dart';
 import 'feeds.dart';
@@ -37,7 +38,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         'title': 'FeedsScreen',
       },
       {
-        'page': Search(),
+        'page': UploadProductForm(),
         'title': 'SearchScreen',
       },
       {
@@ -66,73 +67,41 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       //   title: Text(_pages[_selectedIndex]['title']),
       // ),
       body: _pages[_selectedIndex]['page'],
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 2,
-        clipBehavior: Clip.antiAlias,
-        //elevation: 5,
-        shape: CircularNotchedRectangle(),
-        child: Container(
-          // height: kBottomNavigationBarHeight,
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                width: 0.1,
-              ),
-            ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectedPage,
+        backgroundColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Theme.of(context).textSelectionColor,
+        selectedItemColor: Colors.black,
+        currentIndex: _selectedIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(MyAppIcons.home),
+            tooltip: 'Home',
+            label: 'Home',
           ),
-          child: BottomNavigationBar(
-            onTap: _selectedPage,
-            backgroundColor: Theme.of(context).primaryColor,
-            unselectedItemColor: Theme.of(context).textSelectionColor,
-            selectedItemColor: Colors.purple,
-            currentIndex: _selectedIndex,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(MyAppIcons.home),
-                tooltip: 'Home',
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyAppIcons.feeds),
-                tooltip: 'Feeds',
-                label: 'Feeds',
-              ),
-              BottomNavigationBarItem(
-                activeIcon: null,
-                icon: Icon(null),
-                // icon:Icon(Icons.search,color: Colors.transparent,),
-                tooltip: 'Search',
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyAppIcons.bag),
-                tooltip: 'Cart',
-                label: 'Cart',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(MyAppIcons.user),
-                tooltip: 'Account',
-                label: 'Account',
-              ),
-            ],
+          BottomNavigationBarItem(
+            icon: Icon(MyAppIcons.feeds),
+            tooltip: 'Feeds',
+            label: 'Feeds',
           ),
-        ),
-      ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FloatingActionButton(
-          backgroundColor: Colors.purple,
-          tooltip: 'Search',
-          elevation: 5,
-          child: Icon(MyAppIcons.search),
-          onPressed: () {
-            setState(() {
-              _selectedIndex = 2;
-            });
-          },
-        ),
+          BottomNavigationBarItem(
+            //activeIcon: null,
+            // icon: Icon(null),
+            icon: Icon(MyAppIcons.add),
+            // tooltip: 'Search',
+            // label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MyAppIcons.bag),
+            tooltip: 'Cart',
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(MyAppIcons.users),
+            tooltip: 'Account',
+            label: 'Account',
+          ),
+        ],
       ),
     );
   }

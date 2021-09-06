@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/models/product.dart';
 import 'package:shopping_app2/provider/products.dart';
+import 'package:shopping_app2/screens/home.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
 import 'package:shopping_app2/widgets/search_header.dart';
 
@@ -135,25 +136,26 @@ class _SearchState extends State<Search> {
                       ),
                     ],
                   )
-                : GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    childAspectRatio: 240 / 320,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                    children: List.generate(
-                        _searchTextController.text.isEmpty
-                            ? productsList.length
-                            : _searchList.length, (index) {
-                      return ChangeNotifierProvider.value(
-                        value: _searchTextController.text.isEmpty
-                            ? productsList[index]
-                            : _searchList[index],
-                        child: FeedsProduct(),
-                      );
-                    }),
-                  ),
+                : HomeScreen(),
+            // GridView.count(
+            //     physics: NeverScrollableScrollPhysics(),
+            //     shrinkWrap: true,
+            //     crossAxisCount: 2,
+            //     childAspectRatio: 240 / 320,
+            //     crossAxisSpacing: 8,
+            //     mainAxisSpacing: 8,
+            //     children: List.generate(
+            //         _searchTextController.text.isEmpty
+            //             ? productsList.length
+            //             : _searchList.length, (index) {
+            //       return ChangeNotifierProvider.value(
+            //         value: _searchTextController.text.isEmpty
+            //             ? productsList[index]
+            //             : _searchList[index],
+            //         child: FeedsProduct(),
+            //       );
+            //     }),
+            //   ),
           ),
         ],
       ),
