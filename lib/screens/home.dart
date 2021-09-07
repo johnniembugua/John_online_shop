@@ -76,159 +76,160 @@ class _HomeScreenState extends State<HomeScreen> {
         //   ),
         //   backLayer: BackLayerMenu(),
         //   frontLayer:
-        SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 190.0,
-            width: double.infinity,
-            child: Carousel(
-              boxFit: BoxFit.fill,
-              autoplay: true,
-              animationCurve: Curves.fastOutSlowIn,
-              animationDuration: Duration(milliseconds: 1000),
-              dotSize: 5.0,
-              dotIncreasedColor: Colors.purple,
-              dotBgColor: Colors.black.withOpacity(0.2),
-              dotPosition: DotPosition.bottomCenter,
-              showIndicator: true,
-              indicatorBgPadding: 5.0,
-              images: [
-                ExactAssetImage(_couroselImages[0]),
-                ExactAssetImage(_couroselImages[1]),
-                ExactAssetImage(_couroselImages[2]),
-                ExactAssetImage(_couroselImages[3]),
-              ],
-            ),
+        //   SingleChildScrollView(
+        // child:
+        Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 190.0,
+          width: double.infinity,
+          child: Carousel(
+            boxFit: BoxFit.fill,
+            autoplay: true,
+            animationCurve: Curves.fastOutSlowIn,
+            animationDuration: Duration(milliseconds: 1000),
+            dotSize: 5.0,
+            dotIncreasedColor: Colors.purple,
+            dotBgColor: Colors.black.withOpacity(0.2),
+            dotPosition: DotPosition.bottomCenter,
+            showIndicator: true,
+            indicatorBgPadding: 5.0,
+            images: [
+              ExactAssetImage(_couroselImages[0]),
+              ExactAssetImage(_couroselImages[1]),
+              ExactAssetImage(_couroselImages[2]),
+              ExactAssetImage(_couroselImages[3]),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Categories',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Categories',
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
           ),
-          Container(
-            width: double.infinity,
-            height: 180,
-            child: ListView.builder(
-              itemCount: 6,
+        ),
+        Container(
+          width: double.infinity,
+          height: 180,
+          child: ListView.builder(
+            itemCount: 6,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext ctx, int index) {
+              return CategoryWidget(
+                index: index,
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Text(
+                'Popular Brands',
+                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+              ),
+              Spacer(),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    BrandNavigationRailScreen.routeName,
+                    arguments: {
+                      7,
+                    },
+                  );
+                },
+                child: Text(
+                  'View all...',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                      color: Colors.red),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          height: 210,
+          width: MediaQuery.of(context).size.width * 0.95,
+          child: Swiper(
+            itemCount: _brandImages.length,
+            autoplay: true,
+            viewportFraction: 0.8,
+            scale: 0.9,
+            onTap: (index) {
+              Navigator.of(context).pushNamed(
+                BrandNavigationRailScreen.routeName,
+                arguments: {
+                  index,
+                },
+              );
+            },
+            itemBuilder: (BuildContext ctx, int index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  color: Colors.blueGrey,
+                  child: Image.asset(
+                    _brandImages[index],
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Text(
+                'Popular Products',
+                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+              ),
+              Spacer(),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(FeedsScreen.routeName, arguments: 'popular');
+                },
+                child: Text(
+                  'View all...',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                      color: Colors.red),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: 285,
+          margin: EdgeInsets.symmetric(horizontal: 3),
+          child: ListView.builder(
               scrollDirection: Axis.horizontal,
+              itemCount: popularItems.length,
               itemBuilder: (BuildContext ctx, int index) {
-                return CategoryWidget(
-                  index: index,
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Text(
-                  'Popular Brands',
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-                ),
-                Spacer(),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
-                      BrandNavigationRailScreen.routeName,
-                      arguments: {
-                        7,
-                      },
-                    );
-                  },
-                  child: Text(
-                    'View all...',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 15,
-                        color: Colors.red),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            height: 210,
-            width: MediaQuery.of(context).size.width * 0.95,
-            child: Swiper(
-              itemCount: _brandImages.length,
-              autoplay: true,
-              viewportFraction: 0.8,
-              scale: 0.9,
-              onTap: (index) {
-                Navigator.of(context).pushNamed(
-                  BrandNavigationRailScreen.routeName,
-                  arguments: {
-                    index,
-                  },
-                );
-              },
-              itemBuilder: (BuildContext ctx, int index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.blueGrey,
-                    child: Image.asset(
-                      _brandImages[index],
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Text(
-                  'Popular Products',
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-                ),
-                Spacer(),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(FeedsScreen.routeName, arguments: 'popular');
-                  },
-                  child: Text(
-                    'View all...',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 15,
-                        color: Colors.red),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 285,
-            margin: EdgeInsets.symmetric(horizontal: 3),
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: popularItems.length,
-                itemBuilder: (BuildContext ctx, int index) {
-                  return ChangeNotifierProvider.value(
-                    value: popularItems[index],
-                    child: PopularProducts(
-                        /* imageUrl: popularItems[index].imageUrl,
+                return ChangeNotifierProvider.value(
+                  value: popularItems[index],
+                  child: PopularProducts(
+                      /* imageUrl: popularItems[index].imageUrl,
                           title: popularItems[index].title,
                           description: popularItems[index].description,
                           price: popularItems[index].price, */
-                        ),
-                  );
-                }),
-          )
-        ],
-      ),
-    );
+                      ),
+                );
+              }),
+        )
+      ],
+      //),
 
-    // );
+      //   ),
+    );
   }
 }

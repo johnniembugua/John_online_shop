@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/screens/upload_product_form.dart';
 
+import 'calendar.dart';
 import 'cart/cart.dart';
 import 'feeds.dart';
 import 'home.dart';
@@ -30,7 +31,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   void initState() {
     _pages = [
       {
-        'page': HomeScreen(),
+        'page': Search(),
         'title': 'Homescreen',
       },
       {
@@ -39,7 +40,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       },
       {
         'page': UploadProductForm(),
-        'title': 'SearchScreen',
+        'title': 'Calendar',
       },
       {
         'page': CartScreen(),
@@ -62,47 +63,46 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: Text(_pages[_selectedIndex]['title']),
-      // ),
-      body: _pages[_selectedIndex]['page'],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectedPage,
-        backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Theme.of(context).textSelectionColor,
-        selectedItemColor: Colors.black,
-        currentIndex: _selectedIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(MyAppIcons.home),
-            tooltip: 'Home',
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MyAppIcons.feeds),
-            tooltip: 'Feeds',
-            label: 'Feeds',
-          ),
-          BottomNavigationBarItem(
-            //activeIcon: null,
-            // icon: Icon(null),
-            icon: Icon(MyAppIcons.add),
-            // tooltip: 'Search',
-            // label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MyAppIcons.bag),
-            tooltip: 'Cart',
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MyAppIcons.users),
-            tooltip: 'Account',
-            label: 'Account',
-          ),
-        ],
-      ),
-    );
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: Text(_pages[_selectedIndex]['title']),
+        // ),
+        body: _pages[_selectedIndex]['page'],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _selectedPage,
+          backgroundColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Theme.of(context).textSelectionColor,
+          selectedItemColor: Colors.purple,
+          currentIndex: _selectedIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(MyAppIcons.home),
+              tooltip: 'Home',
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(MyAppIcons.feeds),
+              tooltip: 'Feeds',
+              label: 'Feeds',
+            ),
+            BottomNavigationBarItem(
+              //activeIcon: null,
+              icon: Icon(MyAppIcons.add),
+              // icon:Icon(Icons.search,color: Colors.transparent,),
+              tooltip: 'Add',
+              label: 'Add',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(MyAppIcons.bag),
+              tooltip: 'Cart',
+              label: 'Cart',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(MyAppIcons.user),
+              tooltip: 'Account',
+              label: 'Account',
+            ),
+          ],
+        ));
   }
 }

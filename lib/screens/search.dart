@@ -49,7 +49,7 @@ class _SearchState extends State<Search> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "Search",
+                      text: "Milk shop",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: ColorsConsts.title,
@@ -136,26 +136,23 @@ class _SearchState extends State<Search> {
                       ),
                     ],
                   )
-                : HomeScreen(),
-            // GridView.count(
-            //     physics: NeverScrollableScrollPhysics(),
-            //     shrinkWrap: true,
-            //     crossAxisCount: 2,
-            //     childAspectRatio: 240 / 320,
-            //     crossAxisSpacing: 8,
-            //     mainAxisSpacing: 8,
-            //     children: List.generate(
-            //         _searchTextController.text.isEmpty
-            //             ? productsList.length
-            //             : _searchList.length, (index) {
-            //       return ChangeNotifierProvider.value(
-            //         value: _searchTextController.text.isEmpty
-            //             ? productsList[index]
-            //             : _searchList[index],
-            //         child: FeedsProduct(),
-            //       );
-            //     }),
-            //   ),
+                : _searchTextController.text.isEmpty &&
+                        _searchTextController.text.isEmpty
+                    ? HomeScreen()
+                    : GridView.count(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        childAspectRatio: 240 / 320,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        children: List.generate(_searchList.length, (index) {
+                          return ChangeNotifierProvider.value(
+                            value: _searchList[index],
+                            child: FeedsProduct(),
+                          );
+                        }),
+                      ),
           ),
         ],
       ),

@@ -15,7 +15,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 // }
 class MyAppIcons {
   static IconData home = FontAwesome.home;
-  static IconData feeds = Feather.rss;
+  static IconData feeds = FontAwesome.compass;
   static IconData search = Feather.search;
   static IconData cart = MaterialCommunityIcons.cart;
   static IconData user = Feather.user;
