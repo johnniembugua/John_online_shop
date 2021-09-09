@@ -18,21 +18,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List _couroselImages = [
-    'assets/images/CatBeauty.jpg',
-    'assets/images/CatClothes.jpg',
-    'assets/images/CatWatches.jpg',
-    'assets/images/CatShoes.jpg',
-    'assets/images/Huawei.jpg',
-  ];
+  // List _couroselImages = [
+  //   'assets/images/CatBeauty.jpg',
+  //   'assets/images/CatClothes.jpg',
+  //   'assets/images/CatWatches.jpg',
+  //   'assets/images/CatShoes.jpg',
+  //   'assets/images/Huawei.jpg',
+  // ];
   List _brandImages = [
-    'assets/images/addidas.jpg',
-    'assets/images/apple.jpg',
-    'assets/images/Dell.jpg',
-    'assets/images/h&m.jpg',
-    'assets/images/nike.jpg',
-    'assets/images/samsung.jpg',
-    'assets/images/Huawei.jpg',
+    'assets/images/cow-milk.jpg',
+    'assets/images/Toned2.jpeg',
+    'assets/images/Tetro.jpg',
+    'assets/images/farmented.jpg',
+    'assets/images/sheep-milk.jpg',
+    'assets/images/goat-milk.jpg',
+    // 'assets/images/Huawei.jpg',
 
     //'assets/images/Huawei.jpg',
   ];
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        image: AssetImage('assets/images/CatShoes.jpg'),
+                        image: AssetImage('assets/images/fresh.jpg'),
                         fit: BoxFit.fill,
                       )),
                     ))
@@ -196,65 +196,65 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.all(8.0),
-        //   child: Row(
-        //     children: [
-        //       Text(
-        //         'Popular Brands',
-        //         style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-        //       ),
-        //       Spacer(),
-        //       TextButton(
-        //         onPressed: () {
-        //           Navigator.of(context).pushNamed(
-        //             BrandNavigationRailScreen.routeName,
-        //             arguments: {
-        //               7,
-        //             },
-        //           );
-        //         },
-        //         child: Text(
-        //           'View all...',
-        //           style: TextStyle(
-        //               fontWeight: FontWeight.w800,
-        //               fontSize: 15,
-        //               color: Colors.red),
-        //         ),
-        //       )
-        //     ],
-        //   ),
-        // ),
-        // Container(
-        //   height: 210,
-        //   width: MediaQuery.of(context).size.width * 0.95,
-        //   child: Swiper(
-        //     itemCount: _brandImages.length,
-        //     autoplay: true,
-        //     viewportFraction: 0.8,
-        //     scale: 0.9,
-        //     onTap: (index) {
-        //       Navigator.of(context).pushNamed(
-        //         BrandNavigationRailScreen.routeName,
-        //         arguments: {
-        //           index,
-        //         },
-        //       );
-        //     },
-        //     itemBuilder: (BuildContext ctx, int index) {
-        //       return ClipRRect(
-        //         borderRadius: BorderRadius.circular(10),
-        //         child: Container(
-        //           color: Colors.blueGrey,
-        //           child: Image.asset(
-        //             _brandImages[index],
-        //             fit: BoxFit.fill,
-        //           ),
-        //         ),
-        //       );
-        //     },
-        //   ),
-        // ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Text(
+                'Popular Brands',
+                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+              ),
+              Spacer(),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    BrandNavigationRailScreen.routeName,
+                    arguments: {
+                      0,
+                    },
+                  );
+                },
+                child: Text(
+                  'View all...',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                      color: Colors.red),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+          height: 210,
+          width: MediaQuery.of(context).size.width * 0.95,
+          child: Swiper(
+            itemCount: _brandImages.length,
+            autoplay: true,
+            viewportFraction: 0.8,
+            scale: 0.9,
+            onTap: (index) {
+              Navigator.of(context).pushNamed(
+                BrandNavigationRailScreen.routeName,
+                arguments: {
+                  index,
+                },
+              );
+            },
+            itemBuilder: (BuildContext ctx, int index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  color: Colors.blueGrey,
+                  child: Image.asset(
+                    _brandImages[index],
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

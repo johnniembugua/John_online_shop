@@ -12,28 +12,28 @@ class CategoryWidget extends StatefulWidget {
 class _CategoryWidgetState extends State<CategoryWidget> {
   List<Map<String, Object>> categories = [
     {
-      'categoryName': 'Phones',
-      'categoryImagePath': 'assets/images/CatPhones.png',
+      'categoryName': 'Fresh milk',
+      'categoryImagePath': 'assets/images/fresh.jpg',
     },
     {
-      'categoryName': 'Clothes',
-      'categoryImagePath': 'assets/images/CatClothes.jpg',
+      'categoryName': 'Toned milk',
+      'categoryImagePath': 'assets/images/Toned.jpg',
     },
     {
-      'categoryName': 'Shoes',
-      'categoryImagePath': 'assets/images/CatShoes.jpg',
+      'categoryName': 'Tetro milk',
+      'categoryImagePath': 'assets/images/Tetro.jpg',
     },
     {
-      'categoryName': 'Beauty&Health',
-      'categoryImagePath': 'assets/images/CatBeauty.jpg',
+      'categoryName': 'Farmented milk',
+      'categoryImagePath': 'assets/images/farmented2.png',
     },
     {
-      'categoryName': 'Laptops',
-      'categoryImagePath': 'assets/images/CatLaptops.png',
+      'categoryName': 'Cow milk',
+      'categoryImagePath': 'assets/images/cow-milk.jpg',
     },
     {
-      'categoryName': 'Furniture',
-      'categoryImagePath': 'assets/images/CatFurniture.jpg',
+      'categoryName': 'Goat milk',
+      'categoryImagePath': 'assets/images/goat3.jpg',
     },
     // {
     //   'categoryName': 'Watches',

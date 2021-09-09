@@ -18,9 +18,10 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
   final Widget leading;
   final Widget action;
   final Widget stackChild;
+  final Widget imageHeader;
 
   SearchByHeader({
-    this.flexibleSpace = 190,
+    this.flexibleSpace = 200,
     this.backGroundHeight = 150,
     @required this.stackPaddingTop,
     this.titlePaddingTop = 35,
@@ -29,6 +30,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
     this.leading,
     this.action,
     @required this.stackChild,
+    @required this.imageHeader,
   });
 
   @override
@@ -120,13 +122,9 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
                   width: 40,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                      )),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: imageHeader,
                 ),
               ),
             ),

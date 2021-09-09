@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +18,35 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   TextEditingController _searchTextController;
   final FocusNode _node = FocusNode();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _uid;
+
+  String _userImageUrl;
   void initState() {
     super.initState();
     _searchTextController = TextEditingController();
     _searchTextController.addListener(() {
       setState(() {});
+
     });
+    getData();
+  }
+  void getData() async {
+    User user = _auth.currentUser;
+    _uid = user.uid;
+    user.email;
+    final DocumentSnapshot userDoc = user.isAnonymous
+        ? null
+        : await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+    if (userDoc == null) {
+      return;
+    } else {
+      setState(() {
+        
+        _userImageUrl = userDoc.get('imageUrl');
+        //print('name $_name');
+      });
+    }
   }
 
   @override
@@ -43,6 +68,12 @@ class _SearchState extends State<Search> {
             floating: true,
             pinned: true,
             delegate: SearchByHeader(
+              imageHeader: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(_userImageUrl ?? 'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg',),
+                        fit: BoxFit.fill)),
+              ),
               stackPaddingTop: 130,
               titlePaddingTop: 50,
               title: RichText(

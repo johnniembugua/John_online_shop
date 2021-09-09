@@ -416,28 +416,28 @@ class _UploadProductFormState extends State<UploadProductForm> {
                             DropdownButton<String>(
                               items: [
                                 DropdownMenuItem<String>(
-                                  child: Text('Phones'),
-                                  value: 'Phones',
+                                  child: Text('Fresh milk'),
+                                  value: 'Fresh milk',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Clothes'),
-                                  value: 'Clothes',
+                                  child: Text('Toned milk'),
+                                  value: 'Toned milk',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Beauty & health'),
-                                  value: 'Beauty',
+                                  child: Text('Tetro Milk'),
+                                  value: 'Tetro',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Shoes'),
-                                  value: 'Shoes',
+                                  child: Text('Farmented Milk'),
+                                  value: 'Farmented',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Funiture'),
-                                  value: 'Funiture',
+                                  child: Text('Cow milk'),
+                                  value: 'Sheep milk',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Watches'),
-                                  value: 'Watches',
+                                  child: Text('Goat milk'),
+                                  value: 'Goat milk',
                                 ),
                               ],
                               onChanged: (String value) {
@@ -490,33 +490,33 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                   value: 'Brandless',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Addidas'),
-                                  value: 'Addidas',
+                                  child: Text('Fresh milk'),
+                                  value: 'Fresh',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Apple'),
-                                  value: 'Apple',
+                                  child: Text('Toned milk'),
+                                  value: 'Toned',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Dell'),
-                                  value: 'Dell',
+                                  child: Text('Tetro milk'),
+                                  value: 'Tetro',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('H&M'),
-                                  value: 'H&M',
+                                  child: Text('Farmented milk'),
+                                  value: 'Farmented',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Nike'),
-                                  value: 'Nike',
+                                  child: Text('Cow milk'),
+                                  value: 'Cow',
                                 ),
                                 DropdownMenuItem<String>(
-                                  child: Text('Samsung'),
-                                  value: 'Samsung',
+                                  child: Text('Goat milk'),
+                                  value: 'Goat',
                                 ),
-                                DropdownMenuItem<String>(
-                                  child: Text('Huawei'),
-                                  value: 'Huawei',
-                                ),
+                                // DropdownMenuItem<String>(
+                                //   child: Text('Huawei'),
+                                //   value: 'Huawei',
+                                // ),
                               ],
                               onChanged: (String value) {
                                 setState(() {

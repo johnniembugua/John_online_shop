@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app2/consts/colors.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
@@ -11,7 +14,10 @@ import 'package:shopping_app2/provider/fav_provider.dart';
 import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/screens/cart/cart.dart';
 import 'package:shopping_app2/screens/wishlist/wishlist.dart';
+import 'package:shopping_app2/services/global_method.dart';
+import 'package:shopping_app2/services/payment.dart';
 import 'package:shopping_app2/widgets/feeds_products.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductDetails extends StatefulWidget {
   static const routeName = '/ProductDetails';
@@ -24,7 +30,34 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   GlobalKey previewController = new GlobalKey();
   @override
+  void initState() {
+    super.initState();
+    StripeService.init();
+  }
+
+  var response;
+  double subTotal;
+
+  Future<void> payWithCard(int amount) async {
+    ProgressDialog dialog = ProgressDialog(context);
+    dialog.style(message: 'Please wait ...');
+    await dialog.show();
+    response = await StripeService.payWithCard(
+        currency: 'USD', amount: amount.toString());
+    await dialog.hide();
+    print('response: ${response.success}');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(response.message),
+        duration:
+            Duration(milliseconds: response.success == true ? 1500 : 3000),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    GlobalMethod globalMethod = GlobalMethod();
     final themeState = Provider.of<DarkThemeProvider>(context);
     final productData = Provider.of<Products>(context, listen: false);
 
@@ -33,6 +66,8 @@ class _ProductDetailsState extends State<ProductDetails> {
     final cartProvider = Provider.of<CartProvider>(context);
     final favsProvider = Provider.of<FavsProvider>(context);
     final productList = productData.products;
+    var uuid = Uuid();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
 
     return Scaffold(
       body: Stack(
@@ -169,16 +204,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       _details(themeState.darkTheme, 'Brand',
                           ' ${productAttr.brand}'),
-                      _details(themeState.darkTheme, 'Quantity',
+                      _details(themeState.darkTheme, ' Quantity',
                           ' ${productAttr.quantity}'),
-                      _details(themeState.darkTheme, 'Category',
+                      _details(themeState.darkTheme, 'Category ',
                           productAttr.productCategoryName),
                       _details(
                           themeState.darkTheme,
                           'Popularity',
                           productAttr.isPopular
-                              ? 'Popular'
-                              : 'Not very Popular'),
+                              ? ' Popular'
+                              : ' Not very Popular'),
                       SizedBox(
                         height: 15,
                       ),
@@ -357,7 +392,39 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Container(
                     height: 50,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        double amountInCents = subTotal * 1000;
+                        int integerAmount = (amountInCents / 10).ceil();
+                        await payWithCard(integerAmount);
+                        if (response.success == true) {
+                          User user = _auth.currentUser;
+                          final _uid = user.uid;
+                          cartProvider.getCartItems
+                              .forEach((key, orderValue) async {
+                            final orderId = uuid.v4();
+                            try {
+                              await FirebaseFirestore.instance
+                                  .collection('order')
+                                  .doc(orderId)
+                                  .set({
+                                'orderId': orderId,
+                                'userId': _uid,
+                                'productId': orderValue.productId,
+                                'title': orderValue.title,
+                                'price': orderValue.price * orderValue.quantity,
+                                'imageUrl': orderValue.imageUrl,
+                                'quantity': orderValue.quantity,
+                                'orderDate': Timestamp.now(),
+                              });
+                            } catch (error) {
+                              print('error occured $error');
+                            }
+                          });
+                        } else {
+                          globalMethod.authErrorHandle(
+                              'Please enter genuine credentials', context);
+                        }
+                      },
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       shape: RoundedRectangleBorder(side: BorderSide.none),
                       color: Theme.of(context).backgroundColor,

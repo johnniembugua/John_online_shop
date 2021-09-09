@@ -28,44 +28,45 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
     print(routeArgs.toString());
     if (_selectedIndex == 0) {
       setState(() {
-        brand = 'Addidas';
+        brand = 'All';
       });
     }
     if (_selectedIndex == 1) {
       setState(() {
-        brand = 'Apple';
+        brand = 'Fresh milk';
       });
     }
     if (_selectedIndex == 2) {
       setState(() {
-        brand = 'Dell';
+        brand = 'Toned milk';
       });
     }
     if (_selectedIndex == 3) {
       setState(() {
-        brand = 'H&M';
+        brand = 'Tetro milk';
       });
     }
     if (_selectedIndex == 4) {
       setState(() {
-        brand = 'Nike';
+        brand = 'Farmented milk';
       });
     }
     if (_selectedIndex == 5) {
       setState(() {
-        brand = 'Samsung';
+        brand = 'Cow milk';
       });
     }
     if (_selectedIndex == 6) {
       setState(() {
-        brand = 'Huawei';
+        brand = 'Goat milk';
       });
     }
-    if (_selectedIndex == 7) {
-      setState(() {
-        brand = 'All';
-      });
-    }
+    // if (_selectedIndex == 6) {
+    //   setState(() {
+    //     brand = 'Huawei';
+    //   });
+    // }
+
     super.didChangeDependencies();
   }
 
@@ -89,44 +90,45 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                           _selectedIndex = index;
                           if (_selectedIndex == 0) {
                             setState(() {
-                              brand = 'Addidas';
+                              brand = 'All';
                             });
                           }
                           if (_selectedIndex == 1) {
                             setState(() {
-                              brand = 'Apple';
+                              brand = 'Fresh milk';
                             });
                           }
                           if (_selectedIndex == 2) {
                             setState(() {
-                              brand = 'Dell';
+                              brand = 'Toned milk';
                             });
                           }
                           if (_selectedIndex == 3) {
                             setState(() {
-                              brand = 'H&M';
+                              brand = 'Tetro milk';
                             });
                           }
                           if (_selectedIndex == 4) {
                             setState(() {
-                              brand = 'Nike';
+                              brand = 'Farmented milk';
                             });
                           }
                           if (_selectedIndex == 5) {
                             setState(() {
-                              brand = 'Samsung';
+                              brand = 'Cow milk';
                             });
                           }
                           if (_selectedIndex == 6) {
                             setState(() {
-                              brand = 'Huawei';
+                              brand = 'Goat milk';
                             });
                           }
-                          if (_selectedIndex == 7) {
-                            setState(() {
-                              brand = 'All';
-                            });
-                          }
+                          // if (_selectedIndex == 6) {
+                          //   setState(() {
+                          //     brand = 'Huawei';
+                          //   });
+                          // }
+
                           print(brand);
                         });
                       },
@@ -140,12 +142,12 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                             child: CircleAvatar(
                               radius: 16,
                               backgroundImage: AssetImage(
-                                'assets/images/CatLaptops.png',
+                                'assets/images/farmented2.png',
                               ),
                             ),
                           ),
                           SizedBox(
-                            height: 80,
+                            height: 20,
                           ),
                         ],
                       ),
@@ -161,14 +163,14 @@ class _BrandNavigationRailScreenState extends State<BrandNavigationRailScreen> {
                         letterSpacing: 0.8,
                       ),
                       destinations: [
-                        buildRotatedTextRailDestination('Addidas', padding),
-                        buildRotatedTextRailDestination("Apple", padding),
-                        buildRotatedTextRailDestination("Dell", padding),
-                        buildRotatedTextRailDestination("H&M", padding),
-                        buildRotatedTextRailDestination("Nike", padding),
-                        buildRotatedTextRailDestination("Samsung", padding),
-                        buildRotatedTextRailDestination("Huawei", padding),
                         buildRotatedTextRailDestination("All", padding),
+                        buildRotatedTextRailDestination('Fresh', padding),
+                        buildRotatedTextRailDestination("Toned", padding),
+                        buildRotatedTextRailDestination("Tetro", padding),
+                        buildRotatedTextRailDestination("Farmented", padding),
+                        buildRotatedTextRailDestination("Cow", padding),
+                        buildRotatedTextRailDestination("Goat", padding),
+                        // buildRotatedTextRailDestination("Huawei", padding),
                       ],
                     ),
                   ),
@@ -208,7 +210,7 @@ class ContentSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
-    final productsBrands = productData.findByBrand(brand);
+    final productsBrands = productData.findByCategory(brand);
     if (brand == 'All') {
       for (int i = 0; i < productData.products.length; i++) {
         productsBrands.add(productData.products[i]);

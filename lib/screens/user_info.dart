@@ -116,8 +116,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     fit: BoxFit.fill,
-                                    image: NetworkImage(_userImageUrl ??
-                                        'https://images-na.ssl-images-amazon.com/images/I/51ME-ADMjRL._AC_SL1000_.jpg'),
+                                    image: NetworkImage(
+                                      _userImageUrl ??
+                                          'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg',
+                                    ),
                                   ),
                                 ),
                               ),
@@ -135,9 +137,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       ],
                     ),
                     background: Image(
-                      //TODO:Change default imageUrl
-                      image: NetworkImage(_userImageUrl ??
-                          'https://images-na.ssl-images-amazon.com/images/I/51ME-ADMjRL._AC_SL1000_.jpg'),
+                      image: NetworkImage(
+                        _userImageUrl ??
+                            'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg',
+                      ),
                       fit: BoxFit.fill,
                     ),
                   ),
