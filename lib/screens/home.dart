@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/images/Toned2.jpeg',
     'assets/images/Tetro.jpg',
     'assets/images/farmented.jpg',
-    'assets/images/sheep-milk.jpg',
+    'assets/images/goat3.jpg',
     'assets/images/goat-milk.jpg',
     // 'assets/images/Huawei.jpg',
 
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                         image: AssetImage('assets/images/fresh.jpg'),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       )),
                     ))
               ],
