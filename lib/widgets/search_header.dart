@@ -20,8 +20,8 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
   final Widget stackChild;
 
   SearchByHeader({
-    this.flexibleSpace = 250,
-    this.backGroundHeight = 200,
+    this.flexibleSpace = 190,
+    this.backGroundHeight = 150,
     @required this.stackPaddingTop,
     this.titlePaddingTop = 35,
     @required this.title,
@@ -56,7 +56,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
             ),
           ),
           Positioned(
-            top: 10,
+            top: 12,
             right: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -64,7 +64,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
                 Consumer<FavsProvider>(
                   builder: (_, favs, ch) => Badge(
                     badgeColor: ColorsConsts.favBadgeColor,
-                    position: BadgePosition.topEnd(top: 5, end: 7),
+                    position: BadgePosition.topEnd(top: 7, end: 7),
                     badgeContent: Text(
                       favs.getFavsItems.length.toString(),
                       style: TextStyle(color: ColorsConsts.white),
@@ -81,7 +81,7 @@ class SearchByHeader extends SliverPersistentHeaderDelegate {
                 Consumer<CartProvider>(
                   builder: (_, cart, ch) => Badge(
                     badgeColor: ColorsConsts.cartBadgeColor,
-                    position: BadgePosition.topEnd(top: 5, end: 7),
+                    position: BadgePosition.topEnd(top: 6, end: 7),
                     badgeContent: Text(
                       cart.getCartItems.length.toString(),
                       style: TextStyle(color: ColorsConsts.white),

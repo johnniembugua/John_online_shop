@@ -33,7 +33,7 @@ class _OrderFullState extends State<OrderFull> {
             arguments: orderAttr.productId);
       },
       child: Container(
-        height: 150.0,
+        height: 130.0,
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -82,7 +82,7 @@ class _OrderFullState extends State<OrderFull> {
                                     () async {
                                   setState(() {
                                     _isLoading = true;
-                                  }); 
+                                  });
                                   await FirebaseFirestore.instance
                                       .collection('order')
                                       .doc(orderAttr.orderId)
@@ -146,21 +146,21 @@ class _OrderFullState extends State<OrderFull> {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Flexible(child: Text('Order Date')),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Flexible(
-                            child: Text(
-                              '${orderAttr.orderDate}',
-                              style: TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Flexible(child: Text('Order Date')),
+                      //     SizedBox(
+                      //       width: 5,
+                      //     ),
+                      //     Flexible(
+                      //       child: Text(
+                      //         '${orderAttr.orderDate}',
+                      //         style: TextStyle(
+                      //             fontSize: 13, fontWeight: FontWeight.w600),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

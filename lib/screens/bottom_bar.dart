@@ -71,8 +71,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         bottomNavigationBar: BottomNavigationBar(
           onTap: _selectedPage,
           backgroundColor: Theme.of(context).primaryColor,
-          unselectedItemColor: Theme.of(context).textSelectionColor,
-          selectedItemColor: Colors.purple,
+          unselectedItemColor: Colors.black87,
+          selectedItemColor: Colors.black,
           currentIndex: _selectedIndex,
           items: [
             BottomNavigationBarItem(

@@ -9,6 +9,7 @@ import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/screens/feeds.dart';
 import 'package:shopping_app2/widgets/backlayer.dart';
 import 'package:shopping_app2/widgets/category.dart';
+import 'package:shopping_app2/widgets/custom_text.dart';
 import 'package:shopping_app2/widgets/popular_products.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,27 +83,99 @@ class _HomeScreenState extends State<HomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 190.0,
           width: double.infinity,
-          child: Carousel(
-            boxFit: BoxFit.fill,
-            autoplay: true,
-            animationCurve: Curves.fastOutSlowIn,
-            animationDuration: Duration(milliseconds: 1000),
-            dotSize: 5.0,
-            dotIncreasedColor: Colors.purple,
-            dotBgColor: Colors.black.withOpacity(0.2),
-            dotPosition: DotPosition.bottomCenter,
-            showIndicator: true,
-            indicatorBgPadding: 5.0,
-            images: [
-              ExactAssetImage(_couroselImages[0]),
-              ExactAssetImage(_couroselImages[1]),
-              ExactAssetImage(_couroselImages[2]),
-              ExactAssetImage(_couroselImages[3]),
-            ],
+          height: 180,
+          margin: const EdgeInsets.only(
+            left: 15,
+            right: 15,
+            top: 10,
+            bottom: 10,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.green,
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Expanded(
+                    flex: 4,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: CustomText(
+                            text: 'Set Schedule for your repeated delivery',
+                            maxlines: 2,
+                            color: Colors.white,
+                            size: 20,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Flexible(
+                          child: CustomText(
+                            text:
+                                'Get them delivered everyday to your doorstep',
+                            maxlines: 2,
+                            color: Colors.white,
+                            size: 18,
+                            weight: FontWeight.w300,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                          ),
+                          onPressed: () {},
+                          child: Text(
+                            'Know more',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
+                    )),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage('assets/images/CatShoes.jpg'),
+                        fit: BoxFit.fill,
+                      )),
+                    ))
+              ],
+            ),
           ),
         ),
+        // Container(
+        //   height: 190.0,
+        //   width: double.infinity,
+        //   child: Carousel(
+        //     boxFit: BoxFit.fill,
+        //     autoplay: true,
+        //     animationCurve: Curves.fastOutSlowIn,
+        //     animationDuration: Duration(milliseconds: 1000),
+        //     dotSize: 5.0,
+        //     dotIncreasedColor: Colors.purple,
+        //     dotBgColor: Colors.black.withOpacity(0.2),
+        //     dotPosition: DotPosition.bottomCenter,
+        //     showIndicator: true,
+        //     indicatorBgPadding: 5.0,
+        //     images: [
+        //       ExactAssetImage(_couroselImages[0]),
+        //       ExactAssetImage(_couroselImages[1]),
+        //       ExactAssetImage(_couroselImages[2]),
+        //       ExactAssetImage(_couroselImages[3]),
+        //     ],
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -123,65 +196,65 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Text(
-                'Popular Brands',
-                style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
-              ),
-              Spacer(),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(
-                    BrandNavigationRailScreen.routeName,
-                    arguments: {
-                      7,
-                    },
-                  );
-                },
-                child: Text(
-                  'View all...',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15,
-                      color: Colors.red),
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          height: 210,
-          width: MediaQuery.of(context).size.width * 0.95,
-          child: Swiper(
-            itemCount: _brandImages.length,
-            autoplay: true,
-            viewportFraction: 0.8,
-            scale: 0.9,
-            onTap: (index) {
-              Navigator.of(context).pushNamed(
-                BrandNavigationRailScreen.routeName,
-                arguments: {
-                  index,
-                },
-              );
-            },
-            itemBuilder: (BuildContext ctx, int index) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  color: Colors.blueGrey,
-                  child: Image.asset(
-                    _brandImages[index],
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Row(
+        //     children: [
+        //       Text(
+        //         'Popular Brands',
+        //         style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+        //       ),
+        //       Spacer(),
+        //       TextButton(
+        //         onPressed: () {
+        //           Navigator.of(context).pushNamed(
+        //             BrandNavigationRailScreen.routeName,
+        //             arguments: {
+        //               7,
+        //             },
+        //           );
+        //         },
+        //         child: Text(
+        //           'View all...',
+        //           style: TextStyle(
+        //               fontWeight: FontWeight.w800,
+        //               fontSize: 15,
+        //               color: Colors.red),
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
+        // Container(
+        //   height: 210,
+        //   width: MediaQuery.of(context).size.width * 0.95,
+        //   child: Swiper(
+        //     itemCount: _brandImages.length,
+        //     autoplay: true,
+        //     viewportFraction: 0.8,
+        //     scale: 0.9,
+        //     onTap: (index) {
+        //       Navigator.of(context).pushNamed(
+        //         BrandNavigationRailScreen.routeName,
+        //         arguments: {
+        //           index,
+        //         },
+        //       );
+        //     },
+        //     itemBuilder: (BuildContext ctx, int index) {
+        //       return ClipRRect(
+        //         borderRadius: BorderRadius.circular(10),
+        //         child: Container(
+        //           color: Colors.blueGrey,
+        //           child: Image.asset(
+        //             _brandImages[index],
+        //             fit: BoxFit.fill,
+        //           ),
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -225,6 +298,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                 );
               }),
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 10, right: 10),
+          width: double.infinity,
+          // height: 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.blue.shade100,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.green,
+                ),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Flexible(
+                  child: Text(
+                    'Order before 2pm and get deiver by 8pm the same day or Order by 12midnight and get deliver by 8 AM the next day',
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: Colors.green),
+                  ),
+                )
+              ],
+            ),
+          ),
         )
       ],
       //),

@@ -64,7 +64,7 @@ class _OrderScreenState extends State<OrderScreen> {
                           // globalMethod.showDialogg(
                           //     'Clear cart!',
                           //     'Your Cart Will be cleared',
-                          //     () => cartProvider.clearCart(),
+                          //     () => orderProvider.clearCart(),
                           //     context);
                         },
                       )

@@ -23,7 +23,7 @@ class _FeedsProductState extends State<FeedsProduct> {
             arguments: productAttributes.id),
         child: Container(
           width: 250,
-          height: 290,
+          height: 350,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             color: Theme.of(context).backgroundColor,
@@ -36,7 +36,7 @@ class _FeedsProductState extends State<FeedsProduct> {
                     borderRadius: BorderRadius.circular(4),
                     child: Container(
                       width: double.infinity,
-                      height: 150,
+                      height: 130,
                       child: Image.network(
                         productAttributes.imageUrl,
                         fit: BoxFit.fitWidth,

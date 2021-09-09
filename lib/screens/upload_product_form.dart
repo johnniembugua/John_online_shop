@@ -213,6 +213,9 @@ class _UploadProductFormState extends State<UploadProductForm> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 10,
+            ),
             Center(
               child: Card(
                 margin: EdgeInsets.all(15),
@@ -587,8 +590,61 @@ class _UploadProductFormState extends State<UploadProductForm> {
               ),
             ),
             SizedBox(
-              height: 50,
-            )
+              height: 30,
+            ),
+            Container(
+              height: kBottomNavigationBarHeight * 0.8,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: ColorsConsts.white,
+                border: Border(
+                  top: BorderSide(
+                    color: Colors.grey,
+                    width: 0.5,
+                  ),
+                ),
+              ),
+              child: Material(
+                color: Theme.of(context).backgroundColor,
+                child: InkWell(
+                  onTap: _trySubmit,
+                  splashColor: Colors.grey,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 2),
+                        child: _isLoading
+                            ? Center(
+                                child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    child: CircularProgressIndicator()))
+                            : Text('Upload',
+                                style: TextStyle(fontSize: 16),
+                                textAlign: TextAlign.center),
+                      ),
+                      GradientIcon(
+                        Feather.upload,
+                        20,
+                        LinearGradient(
+                          colors: <Color>[
+                            Colors.green,
+                            Colors.yellow,
+                            Colors.deepOrange,
+                            Colors.orange,
+                            Colors.yellow[800]
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

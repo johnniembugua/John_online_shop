@@ -43,9 +43,10 @@ class _SearchState extends State<Search> {
             floating: true,
             pinned: true,
             delegate: SearchByHeader(
-              stackPaddingTop: 175,
+              stackPaddingTop: 130,
               titlePaddingTop: 50,
               title: RichText(
+                // textAlign: TextAlign.start,
                 text: TextSpan(
                   children: [
                     TextSpan(
@@ -143,7 +144,7 @@ class _SearchState extends State<Search> {
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         crossAxisCount: 2,
-                        childAspectRatio: 240 / 320,
+                        childAspectRatio: 240 / 350,
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
                         children: List.generate(_searchList.length, (index) {
