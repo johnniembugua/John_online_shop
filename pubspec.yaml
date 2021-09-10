@@ -34,6 +34,8 @@ dependencies:
   stripe_payment: ^1.1.1
   uuid: ^3.0.4
   wave: ^0.2.0
+  table_calendar: ^2.3.3
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:

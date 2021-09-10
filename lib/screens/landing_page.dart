@@ -142,7 +142,7 @@ class _LandingPageState extends State<LandingPage>
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                'Welcome to the biggest online store',
+                'Welcome to the biggest online Milk shop',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 26,
