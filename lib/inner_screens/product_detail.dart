@@ -236,7 +236,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Text(
                                 'No reviews yet',
                                 style: TextStyle(
-                                  color: Theme.of(context).textSelectionColor,
+                                  color: Theme.of(context)
+                                      .textSelectionTheme
+                                      .selectionColor,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 21,
                                 ),
@@ -434,7 +436,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                             'Buy Now'.toUpperCase(),
                             style: TextStyle(
                                 fontSize: 14,
-                                color: Theme.of(context).textSelectionColor),
+                                color: Theme.of(context)
+                                    .textSelectionTheme
+                                    .selectionColor),
                           ),
                           SizedBox(
                             width: 5,

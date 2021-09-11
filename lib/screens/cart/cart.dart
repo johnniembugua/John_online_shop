@@ -169,7 +169,8 @@ class _CartScreenState extends State<CartScreen> {
                         'Checkout',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Theme.of(ctx).textSelectionColor,
+                          color:
+                              Theme.of(ctx).textSelectionTheme.selectionColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
@@ -183,7 +184,7 @@ class _CartScreenState extends State<CartScreen> {
             Text(
               'Total',
               style: TextStyle(
-                color: Theme.of(ctx).textSelectionColor,
+                color: Theme.of(ctx).textSelectionTheme.selectionColor,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),

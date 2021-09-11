@@ -28,7 +28,7 @@ class OrderEmpty extends StatelessWidget {
           'Your order is Empty',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Theme.of(context).textSelectionColor,
+              color: Theme.of(context).textSelectionTheme.selectionColor,
               fontSize: 36,
               fontWeight: FontWeight.w600),
         ),
@@ -64,7 +64,7 @@ class OrderEmpty extends StatelessWidget {
               'Shop now'.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Theme.of(context).textSelectionColor,
+                  color: Theme.of(context).textSelectionTheme.selectionColor,
                   fontSize: 26,
                   fontWeight: FontWeight.w600),
             ),

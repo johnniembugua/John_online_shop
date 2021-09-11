@@ -27,10 +27,10 @@ class _SearchState extends State<Search> {
     _searchTextController = TextEditingController();
     _searchTextController.addListener(() {
       setState(() {});
-
     });
     getData();
   }
+
   void getData() async {
     User user = _auth.currentUser;
     _uid = user.uid;
@@ -42,7 +42,6 @@ class _SearchState extends State<Search> {
       return;
     } else {
       setState(() {
-        
         _userImageUrl = userDoc.get('imageUrl');
         //print('name $_name');
       });
@@ -60,7 +59,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
-    final productsList = productsData.products;
+    //final productsList = productsData.products;
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -71,7 +70,10 @@ class _SearchState extends State<Search> {
               imageHeader: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(_userImageUrl ?? 'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg',),
+                        image: NetworkImage(
+                          _userImageUrl ??
+                              'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg',
+                        ),
                         fit: BoxFit.fill)),
               ),
               stackPaddingTop: 130,

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shopping_app2/consts/my_icons.dart';
 import 'package:shopping_app2/screens/upload_product_form.dart';
 
-import 'calendar.dart';
 import 'cart/cart.dart';
 import 'feeds.dart';
-import 'home.dart';
+
 import 'search.dart';
 import 'user_info.dart';
 

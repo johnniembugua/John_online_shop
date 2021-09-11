@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app2/inner_screens/product_detail.dart';
 
 import 'package:shopping_app2/models/order_attr.dart';
-import 'package:shopping_app2/provider/order_provider.dart';
+
 
 import 'package:shopping_app2/services/global_method.dart';
 

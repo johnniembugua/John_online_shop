@@ -1,13 +1,11 @@
-import 'package:backdrop/backdrop.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app2/consts/colors.dart';
+
 import 'package:shopping_app2/inner_screens/brands_navigation_rail.dart';
 import 'package:shopping_app2/provider/products.dart';
 import 'package:shopping_app2/screens/feeds.dart';
-import 'package:shopping_app2/widgets/backlayer.dart';
+
 import 'package:shopping_app2/widgets/category.dart';
 import 'package:shopping_app2/widgets/custom_text.dart';
 import 'package:shopping_app2/widgets/popular_products.dart';

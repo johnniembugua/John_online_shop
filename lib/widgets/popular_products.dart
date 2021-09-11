@@ -79,7 +79,9 @@ class PopularProducts extends StatelessWidget {
                           child: Text(
                             '\Ksh ${productAttributes.price}',
                             style: TextStyle(
-                              color: Theme.of(context).textSelectionColor,
+                              color: Theme.of(context)
+                                  .textSelectionTheme
+                                  .selectionColor,
                             ),
                           ),
                         )),

@@ -89,6 +89,7 @@ class FeedDialog extends StatelessWidget {
                                 productAttr.imageUrl);
                             Navigator.canPop(context)
                                 ? Navigator.pop(context)
+                                // ignore: unnecessary_statements
                                 : null;
                           },
                   )),
@@ -150,9 +151,9 @@ class FeedDialog extends StatelessWidget {
     List<Color> _color = [
       favs.getFavsItems.containsKey(productId)
           ? Colors.red
-          : Theme.of(context).textSelectionColor,
-      Theme.of(context).textSelectionColor,
-      Theme.of(context).textSelectionColor,
+          : Theme.of(context).textSelectionTheme.selectionColor,
+      Theme.of(context).textSelectionTheme.selectionColor,
+      Theme.of(context).textSelectionTheme.selectionColor,
     ];
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return FittedBox(

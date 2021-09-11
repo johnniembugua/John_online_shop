@@ -108,6 +108,7 @@ class _UploadProductFormState extends State<UploadProductForm> {
             'userId': _uid,
             'createdAt': Timestamp.now(),
           });
+          // ignore: unnecessary_statements
           Navigator.canPop(context) ? Navigator.pop(context) : null;
         }
       } catch (error) {
@@ -339,7 +340,8 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Theme.of(context)
-                                            .textSelectionColor,
+                                            .textSelectionTheme
+                                            .selectionColor,
                                       ),
                                     ),
                                   ),
@@ -355,7 +357,8 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Theme.of(context)
-                                            .textSelectionColor,
+                                            .textSelectionTheme
+                                            .selectionColor,
                                       ),
                                     ),
                                   ),

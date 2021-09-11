@@ -28,7 +28,7 @@ class WishListEmpty extends StatelessWidget {
           'Your Wishlist Is Empty',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Theme.of(context).textSelectionColor,
+            color: Theme.of(context).textSelectionTheme.selectionColor,
             fontSize: 36,
             fontWeight: FontWeight.w600,
           ),
@@ -65,7 +65,7 @@ class WishListEmpty extends StatelessWidget {
               'Add a wish'.toUpperCase(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Theme.of(context).textSelectionColor,
+                color: Theme.of(context).textSelectionTheme.selectionColor,
                 fontSize: 26,
                 fontWeight: FontWeight.w600,
               ),
