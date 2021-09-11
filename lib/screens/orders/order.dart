@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class _OrderScreenState extends State<OrderScreen> {
         currency: 'USD', amount: amount.toString());
     await dialog.hide();
 
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(response.message),
       duration: Duration(milliseconds: response.success == true ? 1500 : 3000),
     ));
@@ -62,10 +63,16 @@ class _OrderScreenState extends State<OrderScreen> {
                         icon: Icon(MyAppIcons.trash),
                         onPressed: () {
                           // globalMethod.showDialogg(
-                          //     'Clear cart!',
-                          //     'Your Cart Will be cleared',
-                          //     () => orderProvider.clearCart(),
-                          //     context);
+                          //     'Clear all Orders!', 'Orders will be cancelled',
+                          //     () async {
+                          //   setState(() {
+                          //     _isLoading = true;
+                          //   });
+                          //   // await FirebaseFirestore.instance
+                          //   //     .collection('order')
+                          //   //     .doc(orderAttr.orderId)
+                          //   //     .delete();
+                          // }, context);
                         },
                       )
                     ],
