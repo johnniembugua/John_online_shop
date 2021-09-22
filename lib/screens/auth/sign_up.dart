@@ -63,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           final ref = FirebaseStorage.instance
               .ref()
               .child('usersImages')
-              .child(_fullName + '.jpg');
+              .child(_emailAddress + '.jpg');
           await ref.putFile(_pickedImage);
           url = await ref.getDownloadURL();
           await _auth.createUserWithEmailAndPassword(
