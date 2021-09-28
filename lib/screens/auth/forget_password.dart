@@ -103,8 +103,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 ? Align(
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(
-                      color: Colors.green,
-                    ),
+                        //color: Colors.green,
+                        ),
                   )
                 : ElevatedButton(
                     style: ButtonStyle(

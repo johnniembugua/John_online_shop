@@ -6,9 +6,9 @@ class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
       scaffoldBackgroundColor:
-          isDarkTheme ? Colors.green : Colors.grey.shade300,
+          isDarkTheme ? Colors.black54 : Colors.grey.shade300,
       primarySwatch: Colors.purple,
-      primaryColor: isDarkTheme ? Colors.green : Colors.grey.shade300,
+      primaryColor: isDarkTheme ? Colors.black26 : Colors.grey.shade300,
       accentColor: Colors.deepPurple,
       backgroundColor: isDarkTheme ? Colors.grey.shade700 : Colors.white,
       indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
@@ -20,7 +20,7 @@ class Styles {
       disabledColor: Colors.grey,
       textSelectionColor: isDarkTheme ? Colors.white : Colors.black,
       cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
-      canvasColor: isDarkTheme ? Colors.green : Colors.grey[50],
+      canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),

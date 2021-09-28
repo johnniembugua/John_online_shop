@@ -102,7 +102,7 @@ class _CartFullState extends State<CartFull> {
                             width: 5,
                           ),
                           Text(
-                            'Ksh ${cartAttr.price}',
+                            'Ksh ${cartAttr.price}/ltr',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
@@ -131,7 +131,7 @@ class _CartFullState extends State<CartFull> {
                       Row(
                         children: [
                           Text(
-                            'Ships Free',
+                            'Free Delivery',
                             style: TextStyle(
                               color: themeChange.darkTheme
                                   ? Colors.brown.shade900

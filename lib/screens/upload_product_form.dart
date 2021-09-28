@@ -269,7 +269,7 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                       RegExp(r'[0-9]')),
                                 ],
                                 decoration: InputDecoration(
-                                  labelText: 'Price Ksh',
+                                  labelText: 'Price per Litre',
                                   //  prefixIcon: Icon(Icons.mail),
                                   // suffixIcon: Text(
                                   //   '\n \n \$',
@@ -330,8 +330,8 @@ class _UploadProductFormState extends State<UploadProductForm> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FittedBox(
-                                  child: FlatButton.icon(
-                                    textColor: Colors.white,
+                                  child: TextButton.icon(
+                                    //textColor: Colors.white,
                                     onPressed: _pickImageCamera,
                                     icon: Icon(Icons.camera,
                                         color: Colors.purpleAccent),
@@ -347,8 +347,8 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                   ),
                                 ),
                                 FittedBox(
-                                  child: FlatButton.icon(
-                                    textColor: Colors.white,
+                                  child: TextButton.icon(
+                                    //textColor: Colors.white,
                                     onPressed: _pickImageGallery,
                                     icon: Icon(Icons.image,
                                         color: Colors.purpleAccent),
@@ -364,8 +364,8 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                   ),
                                 ),
                                 FittedBox(
-                                  child: FlatButton.icon(
-                                    textColor: Colors.white,
+                                  child: TextButton.icon(
+                                    //textColor: Colors.white,
                                     onPressed: _removeImage,
                                     icon: Icon(
                                       Icons.remove_circle_rounded,
@@ -568,7 +568,7 @@ class _UploadProductFormState extends State<UploadProductForm> {
                                 padding: const EdgeInsets.only(right: 9),
                                 child: TextFormField(
                                   keyboardType: TextInputType.number,
-                                  key: ValueKey('Quantity'),
+                                  key: ValueKey('Quantity in Litres'),
                                   validator: (value) {
                                     if (value.isEmpty) {
                                       return 'Quantity is missed';
@@ -633,11 +633,11 @@ class _UploadProductFormState extends State<UploadProductForm> {
                         20,
                         LinearGradient(
                           colors: <Color>[
-                            Colors.green,
-                            Colors.yellow,
-                            Colors.deepOrange,
-                            Colors.orange,
-                            Colors.yellow[800]
+                            Color(0XFF1F4E5A),
+                            Color(0XFF009C8E),
+                            Color(0XFFFFDB61),
+                            Color(0XFFFFA658),
+                            Color(0XFFEA5F40)
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
