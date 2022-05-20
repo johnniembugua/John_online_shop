@@ -263,24 +263,35 @@ class _LandingPageState extends State<LandingPage>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              OutlineButton(
+              OutlinedButton(
                 onPressed: _googleSignIn,
-                shape: StadiumBorder(),
-                highlightedBorderColor: Colors.red.shade200,
-                borderSide: BorderSide(width: 2, color: Colors.red),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      side: BorderSide(width: 2, color: Colors.red),
+                    ),
+                  ),
+                ),
                 child: Text('Google +'),
               ),
               _isLoading
                   ? CircularProgressIndicator()
-                  : OutlineButton(
+                  : OutlinedButton(
                       onPressed: () {
                         _loginAnonymously();
                         // Navigator.pushNamed(context, BottomBarScreen.routeName);
                       },
-                      shape: StadiumBorder(),
-                      highlightedBorderColor: Colors.deepPurple.shade200,
-                      borderSide:
-                          BorderSide(width: 2, color: Colors.deepPurple),
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side:
+                                BorderSide(width: 2, color: Colors.deepPurple),
+                          ),
+                        ),
+                      ),
                       child: Text('Sign in as a guest'),
                     ),
             ],

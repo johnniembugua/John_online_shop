@@ -31,7 +31,7 @@ dependencies:
   progress_dialog: ^1.2.2
   provider: ^4.3.2+3
   shared_preferences: ^2.0.5
-  stripe_payment: ^1.1.1
+  stripe_payment: 
   uuid: ^3.0.4
   wave: ^0.2.0
   table_calendar: ^2.3.3
